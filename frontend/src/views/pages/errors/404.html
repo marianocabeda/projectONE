@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página no encontrada | ONE Internet</title>
+  <link rel="stylesheet" href="/public/output.css" />
+</head>
+
+<body class="antialiased bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <!-- Header se inyectará por JS -->
+  <div id="header"></div>
+
+  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-br from-principal-50 via-white to-logo-azul-50">
+    
+      <!-- Número 404 con estilo mejorado -->
+      <h1 class="mb-10 relative w-full text-center overflow-visible font-black text-principal-500 leading-none" style="font-size: clamp(6rem, 16vw, 16rem); line-height: 0.95;">
+        404
+      </h1>
+
+      <!-- Mensaje principal (elementos sueltos, sin contenedores/bordes) -->
+      <div class="mb-10 text-center w-full">
+        <h2 class="text-4xl md:text-5xl font-bold text-principal-700 mb-4">
+          ¡Página no encontrada!
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 text-center">
+          Lo sentimos, la página que buscas no existe o ha sido movida.<br/>
+          Verifica la URL o regresa a la página principal para continuar navegando.
+        </p>
+      </div>
+
+      <!-- Botones de acción (sueltos) -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+        <a href="/" class="boton-cta bg-principal-500 text-white hover:bg-principal-600">
+          Ir a Inicio
+        </a>
+      </div>
+
+      <!-- Enlaces útiles (sueltos) -->
+      <p class="label text-principal-600 font-semibold mb-4 text-base text-center">También puedes visitar:</p>
+      <div class="flex flex-wrap gap-6 justify-center items-center mb-8">
+        <a href="/dashboard" class="btn-discreto text-base font-semibold transition-all">Dashboard</a>
+        <span class="text-principal-300 font-bold">•</span>
+        <a href="/login" class="btn-discreto text-base font-semibold transition-all">Autogestión</a>
+        <span class="text-principal-300 font-bold">•</span>
+        <a href="/acercade" class="btn-discreto text-base font-semibold transition-all">Acerca de</a>
+      </div>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Asistencia telefónica, en línea y visitas a domicilio.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            *No incluye daños o desconfiguraciones por el cliente.
+          </p>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600">
+            <a href="https://wa.me/5492634217506" target="_blank"
+              class="hover:text-blue-600 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 mt-2">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Acerca de -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida
+            de los ciudadanos de Rivadavia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div
+        class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/env.js"></script>
+  <script src="/js/utils/logger.js"></script>
+  <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth/token.js"></script>
+  <script type="module" src="/js/encabezado-publico.js"></script>
+
+  <!-- Script para actualizar el año y animaciones -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Animación fade-in al cargar la página
+    window.addEventListener('load', () => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, index * 150);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

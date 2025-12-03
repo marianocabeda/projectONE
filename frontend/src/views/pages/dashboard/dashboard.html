@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | ONE Internet</title>
+  <link href="/public/output.css" rel="stylesheet" />
+</head>
+
+<body class="font-sans bg-principal-50 text-gray-900 dark:bg-dark-bg-primary dark:text-dark-text-primary transition-colors duration-300">
+
+  <!-- Header dinámico -->
+  <div id="header"></div>
+
+  <div class="flex flex-col md:flex-row min-h-screen">
+    <!-- Barra lateral: Oculta en móvil, visible en escritorio -->
+    <aside id="dashboard-aside"
+      class="hidden md:block w-56 lg:w-64 bg-white dark:bg-dark-bg-secondary p-4 sm:p-6 border-r border-gray-200 dark:border-dark-border-primary flex-shrink-0 transition-colors duration-300">
+      <div class="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-principal-600 dark:text-dark-principal-600">Dashboard</div>
+      <nav>
+        <ul id="menu-cliente" class="space-y-1 sm:space-y-2 hidden">
+          <li><a href="/home" data-page="home"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-home mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Home</span></a>
+          </li>
+          <li><a href="/usuario" data-page="usuario"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-user mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Mi Perfil</span></a>
+          </li>
+          <li><a href="/conexiones" data-page="conexiones"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-wifi mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Mis
+                Conexiones</span></a>
+          </li>
+          <li><a href="/facturas" data-page="facturas"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-file-invoice-dollar mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Mis
+                Facturas</span></a>
+          </li>
+          <li data-group="ajustes">
+            <button id="ajustes-toggle"
+              class="flex items-center justify-between w-full px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <span class="flex items-center"><i class="fas fa-cog mr-3"></i>Configuración</span>
+              <svg id="ajustes-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <ul id="ajustes-submenu" class="hidden pl-4 mt-2 space-y-2">
+              <li><a href="/promociones" data-page="promociones"
+                  class="block py-2 px-4 rounded-lg text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Promociones</a>
+              </li>
+              <li><a href="/soporte" data-page="soporte"
+                  class="block py-2 px-4 rounded-lg text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Soporte</a>
+              </li>
+              <li><a href="/cambiar-contrasena" data-page="cambiar-contrasena"
+                  class="block py-2 px-4 rounded-lg text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Cambiar
+                  Contraseña</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul id="menu-verificador" class="space-y-1 sm:space-y-2 hidden">
+          <li><a href="/solicitudes-cola" data-page="solicitudes-cola"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-tasks mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Cola de Solicitudes</span></a>
+          </li>
+          <li><a href="/historial-solicitudes" data-page="historial-solicitudes"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-history mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Historial</span></a>
+          </li>
+          <li><a href="/usuario" data-page="usuario"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-user mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Mi Perfil</span></a>
+          </li>
+          <li data-group="ajustes-verificador">
+            <button id="ajustes-verificador-toggle"
+              class="flex items-center justify-between w-full px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <span class="flex items-center"><i class="fas fa-cog mr-3"></i>Configuración</span>
+              <svg id="ajustes-verificador-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <ul id="ajustes-verificador-submenu" class="hidden pl-4 mt-2 space-y-1 sm:space-y-2">
+              <li><a href="/cambiar-contrasena" data-page="cambiar-contrasena"
+                  class="block py-2 px-4 rounded-lg text-xs sm:text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Cambiar
+                  Contraseña</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul id="menu-atencion" class="space-y-1 sm:space-y-2 hidden">
+          <li><a href="/atencion-panel" data-page="atencion-panel"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-th-large mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Home</span></a>
+          </li>
+          <li><a href="/atencion-nuevas-conexiones" data-page="atencion-nuevas-conexiones"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-user-plus mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Nuevas Conexiones</span></a>
+          </li>
+          <li><a href="#" data-page="atencion-cambio-plan-disabled"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-400 dark:text-dark-text-tertiary cursor-not-allowed opacity-60 rounded-lg font-medium text-sm sm:text-base" title="Próximamente disponible">
+              <i class="fas fa-exchange-alt mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Cambio de Plan</span><i class="fas fa-lock ml-auto text-xs"></i></a>
+          </li>
+          <li><a href="#" data-page="atencion-modificar-datos-disabled"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-400 dark:text-dark-text-tertiary cursor-not-allowed opacity-60 rounded-lg font-medium text-sm sm:text-base" title="Próximamente disponible">
+              <i class="fas fa-edit mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Modificar Datos</span><i class="fas fa-lock ml-auto text-xs"></i></a>
+          </li>
+          <li><a href="#" data-page="atencion-modificar-conexion-disabled"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-400 dark:text-dark-text-tertiary cursor-not-allowed opacity-60 rounded-lg font-medium text-sm sm:text-base" title="Próximamente disponible">
+              <i class="fas fa-network-wired mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Modificar Conexión</span><i class="fas fa-lock ml-auto text-xs"></i></a>
+          </li>
+          <li><a href="#" data-page="atencion-soporte-disabled"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-400 dark:text-dark-text-tertiary cursor-not-allowed opacity-60 rounded-lg font-medium text-sm sm:text-base" title="Próximamente disponible">
+              <i class="fas fa-headset mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Soporte Técnico</span><i class="fas fa-lock ml-auto text-xs"></i></a>
+          </li>
+          <li><a href="/usuario" data-page="usuario"
+              class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <i class="fas fa-user mr-2 sm:mr-3 text-sm sm:text-base"></i><span class="truncate">Mi Perfil</span></a>
+          </li>
+          <li data-group="ajustes-atencion">
+            <button id="ajustes-atencion-toggle"
+              class="flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors text-sm sm:text-base">
+              <span class="flex items-center"><i class="fas fa-cog mr-2 sm:mr-3 text-sm sm:text-base"></i>Configuración</span>
+              <svg id="ajustes-atencion-arrow" class="w-3 h-3 sm:w-4 sm:h-4 transition-transform" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <ul id="ajustes-atencion-submenu" class="hidden pl-4 mt-2 space-y-1 sm:space-y-2">
+              <li><a href="/cambiar-contrasena" data-page="cambiar-contrasena"
+                  class="block py-2 px-4 rounded-lg text-xs sm:text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Cambiar
+                  Contraseña</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul id="menu-admin" class="space-y-2 hidden">
+          <li><a href="/home" data-page="home"
+              class="flex items-center px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-home mr-3"></i>Home</a>
+          </li>
+          <li><a href="/admin-panel" data-page="admin-panel"
+              class="flex items-center px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-tachometer-alt mr-3"></i>Panel de Control</a>
+          </li>
+          <li><a href="/solicitudes-cola" data-page="solicitudes-cola"
+              class="flex items-center px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-tasks mr-3"></i>Solicitudes</a>
+          </li>
+          <li><a href="/historial-solicitudes" data-page="historial-solicitudes"
+              class="flex items-center px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-history mr-3"></i>Historial</a>
+          </li>
+          <li><a href="/usuario" data-page="usuario"
+              class="flex items-center px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-user mr-3"></i>Mi Perfil</a>
+          </li>
+          <li data-group="ajustes-admin">
+            <button id="ajustes-admin-toggle"
+              class="flex items-center justify-between w-full px-4 py-2.5 text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 rounded-lg font-medium transition-colors">
+              <span class="flex items-center"><i class="fas fa-cog mr-3"></i>Configuración</span>
+              <svg id="ajustes-admin-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <ul id="ajustes-admin-submenu" class="hidden pl-4 mt-2 space-y-2">
+              <li><a href="/cambiar-contrasena" data-page="cambiar-contrasena"
+                  class="block py-2 px-4 rounded-lg text-sm text-gray-500 dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-bg-tertiary hover:text-principal-600 dark:hover:text-dark-principal-600 transition-colors">Cambiar
+                  Contraseña</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="dashboard-content" class="flex-grow p-2 sm:p-4 md:p-6 lg:p-8 transition-colors duration-300">
+      <!-- El contenido se cargará aquí dinámicamente -->
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-dark-bg-secondary border-t border-gray-100 dark:border-dark-border-primary transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary leading-relaxed">Asistencia telefónica, en línea y visitas a domicilio.</p>
+          <p class="text-gray-500 dark:text-dark-text-tertiary text-xs mt-2">*No incluye daños o desconfiguraciones por el cliente.</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary"><a href="https://wa.me/5492634217506" target="_blank"
+              class="hover:text-blue-600 dark:hover:text-dark-principal-600 transition flex items-center gap-2">+54 9 263 4217506</a></p>
+          <p class="text-gray-600 dark:text-dark-text-secondary mt-2"><a href="mailto:info@oneinternet.com.ar"
+              class="hover:text-blue-600 dark:hover:text-dark-principal-600 transition">info@oneinternet.com.ar</a></p>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary leading-relaxed">Somos un equipo apasionado y con amplia experiencia en redes de
+            datos, comprometido con un propósito común: mejorar la calidad de vida de los ciudadanos de Rivadavia.</p>
+        </div>
+      </div>
+      <div
+        class="mt-10 pt-6 border-t border-gray-200 dark:border-dark-border-primary flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 dark:text-dark-text-tertiary">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- PDF.js para visor de contratos (debe cargarse temprano como módulo) -->
+  <script type="module" src="/js/utils/pdf-loader.js"></script>
+  <script src="/js/env.js"></script>
+  <script src="/js/utils/logger.js"></script>
+  <!-- Gestor de tema (debe cargarse temprano para evitar flash) -->
+  <script src="/js/utils/gestor-tema.js"></script>
+  <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth/token.js"></script>
+  <script src="/js/auth/restaurar-sesion.js"></script>
+  <script src="/js/auth/auth-guard.js"></script>
+  <script src="/js/auth/session-manager.js"></script>
+  <script src="/js/utils/gestor-roles.js"></script>
+  <script src="/js/utils/manejador-errores.js"></script>
+  <script src="/js/utils/validators.js"></script>
+  <script src="/js/utils/sanitizer.js"></script>
+  <script src="/js/utils/gestor-cache.js"></script>
+  <script src="/js/utils/ayudantes-dom.js"></script>
+  <script src="/js/utils/http.js"></script>
+  <script src="/js/utils/selector-personalizado.js"></script>
+  <script src="/js/utils/cargador-datos-geo.js"></script>
+  <!-- Sistema de Notificaciones - debe cargarse antes de los componentes UI -->
+  <!-- Componente de tarjeta de conexión (debe cargarse antes de conexiones.js) -->
+  <script src="/js/dashboard/cliente/tarjeta-conexion.js"></script>
+  <script src="/js/dashboard/cliente/tarjeta-conexion-eventos.js"></script>
+  <script src="/js/dashboard/cliente/conexiones.js"></script>
+  <script src="/js/utils/notifications.js"></script>
+  <!-- Componentes UI -->
+  <script src="/js/ui/modal-error.js"></script>
+  <script src="/js/ui/modal-exito.js"></script>
+  <script src="/js/ui/boton-switch.js"></script>
+  <script src="/js/ui/menu-notificaciones.js"></script>
+  <script src="/js/ui/modal-notificacion.js"></script>
+  <script src="/js/dashboard/gestor-vistas.js"></script>
+  <script src="/js/dashboard/cliente/empresas.js"></script>
+  <script src="/js/dashboard/cliente/usuario.js"></script>
+  <!-- Script de ver-contrato.js y su modal de validación -->
+  <script src="/js/dashboard/cliente/modal-validacion-token.js"></script>
+  <script src="/js/dashboard/cliente/ver-contrato.js"></script>
+  <!-- dashboard.js DEBE cargarse ANTES del header para que window.loadContent esté disponible -->
+  <script src="/js/dashboard/dashboard.js"></script>
+  <script type="module" src="/js/dashboard/encabezado-dashboard.js"></script>
+  <script src="/js/utils/footer-anio.js"></script>
+
+</body>
+
+</html>

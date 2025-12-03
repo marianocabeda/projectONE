@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home | ONE Internet</title>
+  <link rel="stylesheet" href="/public/output.css" />
+</head>
+
+<body class="antialiased bg-white text-gray-900">
+
+  <!-- Header se inyectará por JS -->
+  <div id="header"></div>
+
+  <main class="mt-0">
+    <!-- SECCION BANNER -->
+    <section id="banner" class="relative w-full h-[50vh] md:h-[60vh] flex flex-col md:flex-row overflow-hidden">
+      <!-- Contenedor para el texto y el degradado de fondo (visible en todas las pantallas) -->
+      <div
+        class="w-full md:w-1/3 h-full flex flex-col justify-center items-center bg-gradient-to-b from-[var(--color-azuloscuro)] to-[var(--color-principal)] md:bg-none md:bg-[var(--color-azuloscuro)] relative z-20">
+        <div
+          class="px-6 py-8 md:py-0 md:pl-20 lg:pl-36 flex flex-col items-center md:items-start w-full text-center md:text-left">
+          <h1
+            class="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg leading-tight whitespace-nowrap">
+            Conectamos
+          </h1>
+          <h2
+            class="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg mt-1 leading-tight whitespace-nowrap">
+            tu mundo.
+          </h2>
+        </div>
+      </div>
+
+      <!-- Contenedor para la imagen (solo visible en pantallas medianas y grandes) -->
+      <div class="w-full md:w-2/3 h-full relative overflow-hidden hidden md:flex">
+        <img src="/images/backgrounds/banner.webp" alt="Banner"
+          class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="absolute inset-0 z-10 banner-degradado"></div>
+        <!-- Degradado de izquierda a derecha sobre la imagen -->
+      </div>
+    </section>
+
+    <!-- SECCION AUTOGESTION -->
+    <section id="autogestion" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center">
+          <p class="text-lg m-0 text-gray-900">Si necesitas descargar tu factura o ver tu cuenta</p>
+          <a href="/login"
+            class="inline-block px-6 py-3 bg-principal-500 text-white rounded-md text-sm font-medium"> ir a
+            Autogestión</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION SWITCH PLANES -->
+    <section id="plan-switch" class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div id="plan-type-switch" class="flex justify-center"></div>
+      </div>
+    </section>
+
+    <!-- SECCION PLANES -->
+    <div id="plans-container" class="flex flex-col md:flex-row gap-12 justify-center items-stretch">
+      <!-- Las tarjetas se generarán aquí con JavaScript -->
+    </div>
+
+    <!-- Configuración para PlansRenderer (usa API real; no incluir mocks aquí) -->
+    <script src="/js/configuracion-planes.js"></script>
+    <script src="/js/utils/inicializar-switch-planes.js"></script>
+
+    <!-- SECCION INFO -->
+    <section id="info" class="py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center items-start">
+          <div class="flex flex-col items-center">
+            <img src="/images/decoration/onu-comodato.webp" alt="ONU WiFi comodato"
+              class="h-32 w-32 object-contain mb-4" />
+            <p class="text-lg text-gray-700">ONU WiFi </br> en comodato</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="/images/decoration/servicio-tecnico.webp" alt="Servicio técnico gratuito"
+              class="h-32 w-32 object-contain mb-4" />
+            <p class="text-lg text-gray-700">Servicio técnico </br> gratuito</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="/images/decoration/soporte-whatsapp.webp" alt="Soporte WhatsApp"
+              class="h-32 w-32 object-contain mb-4" />
+            <p class="text-lg text-gray-700">Soporte vía<br />WhatsApp</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Asistencia telefónica, en línea y visitas a domicilio.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            *No incluye daños o desconfiguraciones por el cliente.
+          </p>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600">
+            <a href="https://wa.me/5492634217506" target="_blank"
+              class="hover:text-blue-600 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 mt-2">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Acerca de -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida
+            de los ciudadanos de Rivadavia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div
+        class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Solo cargar el script de planes (seguro para páginas públicas) -->
+  <script src="/js/env.js"></script>
+  <script src="/js/utils/logger.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/auth/token.js"></script>
+  <!-- session-restore.js removido: no necesario en páginas públicas -->
+  <script src="/js/auth/redirigir-si-autenticado.js"></script>
+  <script src="/js/ui/boton-switch.js"></script>
+  <script type="module" src="/js/encabezado-publico.js"></script>
+  <!-- Cargar plans.js como módulo para que use AppConfig desde config.js -->
+  <script type="module" src="/js/ui/plans.js"></script>
+  <script src="/js/utils/footer-anio.js"></script>
+
+</body>
+
+</html>

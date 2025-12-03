@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | ONE Internet</title>
+  <link href="/public/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen overflow-x-hidden">
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <main class="flex-grow py-12">
+        <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Título -->
+            <div class="text-center mb-10">
+                <h1 id="page-title" class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Crea tu cuenta</h1>
+                <p id="page-desc" class="text-gray-500 text-base md:text-lg">Completa tus datos en simples pasos y comienza a disfrutar de nuestros servicios.</p>
+            </div>
+
+            <div class="md:flex md:flex-row md:gap-10 md:items-start">
+                <!-- Contenedor del menú: relativo para el dropdown en móvil y define el ancho en desktop -->
+                <div class="relative md:w-72 md:flex-shrink-0">
+                    <!-- Botón de hamburguesa para móvil -->
+                    <button id="hamburger-button" class="md:hidden w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md border border-gray-200 mb-4">
+                        <span class="font-semibold text-gray-700">Ver Pasos del Registro</span>
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Navegación paso a paso: dropdown en móvil, panel fijo en desktop -->
+                    <div id="registro-nav" class="hidden md:block absolute md:relative w-full md:w-72 bg-white p-6 rounded-2xl shadow-xl border border-gray-200 z-20">
+                        <div class="mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4">Progreso</h2>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div id="progress-bar" class="bg-principal-500 h-2.5 rounded-full transition-all duration-500 ease-in-out w-0"></div>
+                            </div>
+                        </div>
+                        <nav class="space-y-2" id="step-navigation-list">
+                            <!-- Step titles will be injected here by formManager.js -->
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Contenedor del formulario (derecha) -->
+                <div class="flex-grow mt-4 md:mt-0">
+                    <div id="registro-content" class="w-full max-w-lg mx-auto bg-transparent md:bg-white p-0 md:p-8 rounded-none md:rounded-2xl shadow-none md:shadow-xl border-none md:border md:border-gray-200"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Asistencia telefónica, en línea y visitas a domicilio.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            *No incluye daños o desconfiguraciones por el cliente.
+          </p>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600">
+            <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 mt-2">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Acerca de -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida de los ciudadanos de Rivadavia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts -->
+    <script src="/js/env.js"></script> <!-- Variables de entorno (debe cargarse primero) -->
+    <script src="/js/utils/logger.js"></script> <!-- Sistema de logging seguro -->
+    <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+    <script src="/js/config.js"></script> <!-- Configuración centralizada -->
+    <script src="/js/utils/sanitizer.js"></script> <!-- Sanitización de inputs -->
+    <script src="/js/utils/validators.js"></script> <!-- Validaciones -->
+    <script src="/js/utils/calculadora-documento.js"></script> <!-- Calculadora de CUIL/CUIT -->
+    <script src="/js/utils/entrada-telefono.js"></script> <!-- Componente de teléfono con selector de país -->
+    <script src="/js/ui/modal-error.js"></script> <!-- Componente global de modal de errores -->
+    <script src="/js/ui/spinner-carga.js"></script> <!-- Componente global de spinner de carga -->
+    <script type="module" src="/js/encabezado-publico.js"></script> <!-- Carga el header dinámico -->
+    <script type="module" src="/js/auth/register/formulario-registro.js"></script> <!-- Carga el gestor del formulario -->
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Recuperar Contraseña</title>
+		<!-- Tailwind compilado en local -->
+		<link rel="stylesheet" href="/public/output.css" />
+		<meta name="robots" content="noindex,nofollow" />
+	</head>
+	<body class="h-full bg-gray-50">
+        <!-- HEADER dinámico -->
+        <div id="header"></div>
+
+        <div id="page-content">
+		    <section class="py-8">
+		        <div class="md:bg-white md:rounded-2xl md:shadow-lg p-8 transition-all duration-300 max-w-2xl mx-auto">
+		            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Cambiar Contraseña</h1>
+                <p class="text-gray-600 text-lg">Para tu seguridad, te recomendamos usar una contraseña única que no utilices en otros sitios.</p>
+            </div>
+
+            <!-- Información de seguridad -->
+            <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-blue-800">Requisitos de seguridad</h3>
+                        <div class="mt-2 text-sm text-blue-700">
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Al menos 8 caracteres de longitud</li>
+                                <li>Una letra mayúscula y una minúscula</li>
+                                <li>Al menos un número</li>
+                                <li>Al menos un carácter especial (@$!%*?&#)</li>
+                                <li>Diferente a tu contraseña anterior</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <form id="reset-forgot-form" class="max-w-md mx-auto space-y-6">
+                <!-- Token (oculto) -->
+                <input type="hidden" id="reset-token" name="token" />
+
+                <!-- Indicador si no hay token -->
+                <div id="no-token-warning" class="hidden p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-700">
+                    No se encontró el token de recuperación en el enlace. Por favor solicita un nuevo enlace desde
+                    <a href="/forgot-password" class="font-medium text-principal-600"> Recuperar contraseña</a>.
+                </div>
+
+                <!-- Nueva Contraseña -->
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-2">
+                        Nueva Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="new-password" 
+                        name="nueva_password" 
+                        class="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-principal-500 focus:border-principal-500 transition" 
+                        required 
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        placeholder="••••••••"
+                        aria-label="Nueva contraseña"
+                    >
+                    <p id="password-requirements" class="text-xs text-gray-500 mt-2">
+                        Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.
+                    </p>
+                    <div id="password-strength" class="mt-2 text-sm"></div>
+                </div>
+
+                <!-- Confirmar Nueva Contraseña -->
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">
+                        Confirmar Nueva Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirm-password" 
+                        name="confirm_password" 
+                        class="block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-principal-500 focus:border-principal-500 transition" 
+                        required 
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        placeholder="••••••••"
+                        aria-label="Confirmar nueva contraseña"
+                    >
+                    <p id="confirm-hint" class="text-xs text-gray-500 mt-2">Debe coincidir con la nueva contraseña</p>
+                </div>
+
+                <!-- Mensajes -->
+                <div id="reset-error" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"></div>
+                <div id="reset-success" class="hidden mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700"></div>
+
+                <!-- Botón de envío -->
+                <div class="pt-4">
+                    <button 
+                        type="submit" 
+                        id="reset-submit"
+                        disabled
+                        class="w-full px-6 py-3 bg-principal-600 text-white font-semibold rounded-lg transition duration-200 shadow-md opacity-50 cursor-not-allowed"
+                    >
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+
+            <!-- Nota: este flujo es distinto al de `reset-password` y usa su propio endpoint y script -->
+        </div>
+    </section>
+    
+        <!-- FOOTER -->
+        <footer class="bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+                    <!-- Servicio Técnico -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+                        <p class="text-gray-600 leading-relaxed">Asistencia telefónica, en línea y visitas a domicilio.</p>
+                        <p class="text-gray-500 text-xs mt-2">*No incluye daños o desconfiguraciones por el cliente.</p>
+                    </div>
+
+                    <!-- Centro -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+                        <p class="text-gray-600">
+                            <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 transition flex items-center gap-2">+54 9 263 4217506</a>
+                        </p>
+                        <p class="text-gray-600 mt-2">
+                            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">info@oneinternet.com.ar</a>
+                        </p>
+                    </div>
+
+                    <!-- Derecha -->
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+                        <p class="text-gray-600 leading-relaxed">Somos un equipo apasionado y con amplia experiencia en redes de datos, comprometido con un propósito común: mejorar la calidad de vida de los ciudadanos de Rivadavia.</p>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                    <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+                    <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="/js/env.js"></script>
+        <script src="/js/utils/logger.js"></script>
+        <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+        <script src="/js/config.js"></script>
+        <script src="/js/utils/validators.js"></script>
+        <script src="/js/utils/sanitizer.js"></script>
+        <script src="/js/utils/manejador-errores.js"></script>
+        <script src="/js/utils/http.js"></script>
+        <script src="/js/ui/modal-error.js"></script>
+        <script src="/js/ui/spinner-carga.js"></script>
+        <script src="/js/ui/modal-exito.js"></script>
+        <script type="module" src="/js/encabezado-publico.js"></script>
+        <script src="/js/auth/restablecer-contrasena-olvidada.js"></script>
+
+        <script>
+            // Actualizar año en el footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+	</div>
+	</body>
+	</html>

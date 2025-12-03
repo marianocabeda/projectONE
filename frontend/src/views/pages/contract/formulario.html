@@ -1,0 +1,93 @@
+<main class="flex-grow py-12">
+        <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Título -->
+              <div class="text-center mb-10">
+                <h1 id="page-title" class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-dark-text-primary mb-2">Añadir Conexión</h1>
+                <p id="page-desc" class="text-gray-500 dark:text-dark-text-secondary text-base md:text-lg">Completa los datos para solicitar una nueva conexión.</p>
+              </div>
+
+            <div class="md:flex md:flex-row md:gap-10 md:items-start">
+                <!-- Contenedor del menú: relativo para el dropdown en móvil y define el ancho en desktop -->
+                <div class="relative md:w-72 md:flex-shrink-0">
+                    <!-- Botón de hamburguesa para móvil -->
+                    <button id="hamburger-button" class="md:hidden w-full flex items-center justify-between bg-white dark:bg-dark-bg-card p-4 rounded-lg shadow-md dark:shadow-black/30 border border-gray-200 dark:border-dark-border-primary mb-4">
+                        <span class="font-semibold text-gray-700 dark:text-dark-text-primary">Ver Pasos del Registro</span>
+                        <svg class="w-6 h-6 text-gray-700 dark:text-dark-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Navegación paso a paso: dropdown en móvil, panel fijo en desktop -->
+                    <div id="registro-nav" class="hidden md:block absolute md:relative w-full md:w-72 bg-white dark:bg-dark-bg-card p-6 rounded-2xl shadow-xl dark:shadow-black/50 border border-gray-200 dark:border-dark-border-primary z-20">
+                        <div class="mb-6">
+                            <h2 class="text-xl font-bold text-gray-800 dark:text-dark-text-primary mb-4">Progreso</h2>
+                            <div class="w-full bg-gray-200 dark:bg-dark-bg-tertiary rounded-full h-2.5">
+                                <div id="progress-bar" class="bg-principal-500 dark:bg-dark-principal-600 h-2.5 rounded-full transition-all duration-500 ease-in-out" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <nav class="space-y-2" id="step-navigation-list">
+                            <!-- Step titles will be injected here by formManager.js -->
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Contenedor del formulario (derecha) -->
+                <div class="flex-grow mt-4 md:mt-0">
+                    <div id="registro-content" class="w-full max-w-lg mx-auto bg-transparent md:bg-white md:dark:bg-dark-bg-card p-0 md:p-8 rounded-none md:rounded-2xl shadow-none md:shadow-xl md:dark:shadow-black/50 border-none md:border md:border-gray-200 md:dark:border-dark-border-primary"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+  
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-dark-bg-secondary border-t border-gray-100 dark:border-dark-border-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary leading-relaxed">
+            Asistencia telefónica, en línea y visitas a domicilio.
+          </p>
+          <p class="text-gray-500 dark:text-dark-text-muted text-xs mt-2">
+            *No incluye daños o desconfiguraciones por el cliente.
+          </p>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary">
+            <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 dark:text-dark-text-secondary mt-2">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 dark:hover:text-blue-400 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Acerca de -->
+        <div>
+          <h3 class="font-bold text-gray-900 dark:text-dark-text-primary mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 dark:text-dark-text-secondary leading-relaxed">
+            Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida de los ciudadanos de Rivadavia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div class="mt-10 pt-6 border-t border-gray-200 dark:border-dark-border-primary flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 dark:text-dark-text-muted">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Scripts: moved to dashboard to be loaded centrally -->
+
+</body>
+</html>

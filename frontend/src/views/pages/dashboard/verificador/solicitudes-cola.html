@@ -1,0 +1,306 @@
+<div id="page-content" class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4">
+    <section class="md:bg-white dark:md:bg-dark-bg-card md:p-4 sm:md:p-6 lg:p-8 md:rounded-xl md:border md:border-gray-200 dark:md:border-dark-border-primary md:shadow-sm transition-colors duration-300">
+        
+        <!-- Encabezado -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-4">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-dark-text-primary mb-2">
+                    <i class="fas fa-tasks text-principal-500 dark:text-blue-400 mr-2"></i>
+                    Cola de Solicitudes
+                </h1>
+                <p class="text-sm sm:text-base md:text-lg text-gray-600 dark:text-dark-text-secondary">Gestión de solicitudes de contrato pendientes</p>
+            </div>
+            
+            <!-- Estadísticas rápidas -->
+            <div class="flex flex-wrap justify-center sm:justify-end gap-3 sm:gap-4 mt-4 sm:mt-0">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-principal-600 dark:text-blue-400" id="total-pendientes">0</div>
+                    <div class="text-xs text-gray-500 dark:text-dark-text-tertiary">Pendientes</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-green-600 dark:text-green-400" id="total-factibles">0</div>
+                    <div class="text-xs text-gray-500 dark:text-dark-text-tertiary">Factibles</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-red-600 dark:text-red-400" id="total-no-factibles">0</div>
+                    <div class="text-xs text-gray-500 dark:text-dark-text-tertiary">No Factibles</div>
+                </div>
+                <!-- Botón de refrescar -->
+                <div class="flex items-center">
+                    <button id="btn-refresh" class="boton boton-principal px-3 py-2 text-sm sm:text-base rounded-lg transition-colors active:scale-95">
+                        <i class="fas fa-sync-alt mr-2"></i>Refrescar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestañas para separar colas -->
+        <div class="bg-white dark:bg-dark-bg-card border-b border-gray-200 dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300">
+            <div class="flex flex-wrap gap-2 sm:gap-0">
+                <button id="tab-autogestion" class="tab-solicitud px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-principal-500 dark:border-blue-400 text-principal-600 dark:text-blue-400 transition-colors">
+                    <i class="fas fa-user-circle mr-2"></i>
+                    Autogestión
+                    <span id="badge-autogestion" class="ml-2 px-2 py-0.5 bg-principal-100 dark:bg-blue-900/40 text-principal-700 dark:text-blue-300 rounded-full text-xs font-semibold">0</span>
+                </button>
+                <button id="tab-atencion" class="tab-solicitud px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-transparent text-gray-500 dark:text-dark-text-secondary hover:text-gray-700 dark:hover:text-dark-text-primary hover:border-gray-300 dark:hover:border-dark-border-primary transition-colors">
+                    <i class="fas fa-headset mr-2"></i>
+                    Panel de Atención
+                    <span id="badge-atencion" class="ml-2 px-2 py-0.5 bg-gray-100 dark:bg-dark-bg-tertiary text-gray-600 dark:text-dark-text-secondary rounded-full text-xs font-semibold">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="bg-gray-50 dark:bg-dark-bg-tertiary p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 border border-gray-200 dark:border-dark-border-primary transition-colors duration-300">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <div>
+                    <label class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">Estado</label>
+                    <select id="filter-estado" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500">
+                        <option value="todos">Todos</option>
+                        <option value="pendiente" selected>Pendiente</option>
+                        <option value="factible">Factible</option>
+                        <option value="no_factible">No Factible</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">Buscar</label>
+                    <input type="text" id="filter-buscar" placeholder="Cliente, dirección..." 
+                           class="w-full px-3 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500">
+                </div>
+
+                <div class="flex items-end">
+                    <button id="btn-limpiar-filtros" class="w-full boton boton-gris-discreto px-4 py-2 text-sm sm:text-base rounded-lg transition-colors active:scale-95">
+                        <i class="fas fa-times mr-2"></i><span class="hidden sm:inline">Limpiar </span>Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="solicitudes-loading" class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 dark:border-dark-tertiary border-t-principal-500 dark:border-t-blue-400"></div>
+            <p class="text-gray-600 dark:text-dark-text-secondary mt-4">Cargando solicitudes...</p>
+        </div>
+
+        <!-- Lista de solicitudes vacía -->
+        <div id="solicitudes-vacio" class="hidden text-center py-12">
+            <i class="fas fa-inbox text-6xl text-gray-300 dark:text-dark-text-tertiary mb-4"></i>
+            <p class="text-gray-500 dark:text-dark-text-secondary text-lg">No hay solicitudes pendientes</p>
+        </div>
+
+        <!-- Lista de solicitudes -->
+        <div id="solicitudes-lista" class="hidden space-y-4">
+            <!-- Las solicitudes se cargarán dinámicamente aquí -->
+        </div>
+
+        <!-- Paginación -->
+        <div id="solicitudes-pagination" class="hidden mt-6 flex justify-center items-center gap-2">
+            <button id="btn-prev-page" class="px-4 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg hover:bg-gray-50 dark:hover:bg-dark-secondary disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <span id="page-info" class="text-gray-600 dark:text-dark-text-secondary">Página 1 de 1</span>
+            <button id="btn-next-page" class="px-4 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg hover:bg-gray-50 dark:hover:bg-dark-secondary disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+
+    </section>
+
+    <!-- Modal de procesamiento de solicitud -->
+    <div id="modal-procesar" class="hidden fixed inset-0 bg-black/20 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white dark:bg-dark-bg-card rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border dark:border-dark-border-primary">
+            <div class="p-4 sm:p-6">
+                <!-- Header del modal -->
+                <div class="flex justify-between items-center mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-200 dark:border-dark-border-primary">
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 dark:text-dark-text-primary">
+                        <i class="fas fa-check-circle text-principal-500 mr-2"></i>
+                        <span class="hidden sm:inline">Procesar </span>Solicitud
+                    </h2>
+                    <button id="btn-cerrar-modal" class="boton boton-gris-discreto px-4 py-2 text-sm sm:text-base">
+                        Cancelar
+                    </button>
+                </div>
+
+                <!-- Información del cliente -->
+                <div class="bg-gray-50 dark:bg-dark-bg-tertiary rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                    <h3 class="font-semibold text-gray-700 dark:text-dark-text-primary mb-2 sm:mb-3 text-sm sm:text-base">Información del Cliente</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <div>
+                            <span class="text-gray-600 dark:text-dark-text-secondary">Nombre:</span>
+                            <span class="font-medium ml-1 sm:ml-2 break-words dark:text-dark-text-primary" id="modal-cliente-nombre">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600 dark:text-dark-text-secondary">Nro Conexion:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-nro-conexion">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Email:</span>
+                            <span class="font-medium ml-1 sm:ml-2 break-all" id="modal-cliente-email">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Teléfono:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-cliente-telefono">-</span>
+                        </div>
+                        <div class="col-span-1 sm:col-span-2">
+                            <span class="text-gray-600">Dirección:</span>
+                            <span class="font-medium ml-1 sm:ml-2 break-words" id="modal-cliente-direccion">-</span>
+                        </div>
+                        <div class="col-span-1 sm:col-span-2">
+                            <span class="text-gray-600">Plan solicitado:</span>
+                            <span class="font-medium ml-1 sm:ml-2 break-words" id="modal-plan-solicitado">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Latitud:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-latitud">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Longitud:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-longitud">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Distrito:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-distrito">-</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Departamento:</span>
+                            <span class="font-medium ml-1 sm:ml-2" id="modal-departamento">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Observaciones de la notificación (solo si existe) -->
+                <div id="campo-observacion-notificacion" class="hidden bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-400 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                    <h3 class="font-semibold text-amber-800 dark:text-amber-300 mb-2 sm:mb-3 text-sm sm:text-base flex items-center">
+                        <i class="fas fa-exclamation-triangle text-amber-500 dark:text-amber-400 mr-1 sm:mr-2"></i>
+                        Observación
+                    </h3>
+                    <p class="text-sm text-amber-900 dark:text-amber-200" id="texto-observacion-notificacion"></p>
+                </div>
+
+                <!-- Mapa de ubicación -->
+                <div class="bg-gray-50 dark:bg-dark-bg-tertiary rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                    <h3 class="font-semibold text-gray-700 dark:text-dark-text-primary mb-2 sm:mb-3 text-sm sm:text-base">
+                        <i class="fas fa-map-marker-alt text-principal-500 dark:text-blue-400 mr-1 sm:mr-2"></i>
+                        Ubicación de Instalación
+                    </h3>
+                    <div id="modal-mapa" class="w-full h-48 sm:h-64 rounded-lg overflow-hidden border border-gray-300 dark:border-dark-border-primary"></div>
+                    <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-2">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        <span class="hidden sm:inline">Ubicación seleccionada por el cliente durante la solicitud</span>
+                        <span class="sm:hidden">Ubicación del cliente</span>
+                    </p>
+                </div>
+
+                <!-- Switch de decisión (usando componente Button/Switch) -->
+                <div class="flex justify-center pt-4 sm:pt-6 border-t border-gray-200 dark:border-dark-border-primary">
+                    <div id="switch-decision-container"></div>
+                </div>                <!-- Formulario de datos técnicos -->
+                <form id="form-procesar-solicitud" class="mt-4 sm:mt-6">
+                    <input type="hidden" id="modal-solicitud-id" />
+                    
+                    <!-- Campos técnicos (solo para solicitudes factibles) -->
+                    <div id="campos-factible" class="space-y-4 sm:space-y-6 mb-4 sm:mb-6 hidden">
+                        <div>
+                            <label for="input-vlan" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">
+                                VLAN <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="input-vlan" 
+                                name="vlan"
+                                placeholder="Ej: VLAN100"
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm"
+                            />
+                            <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-1">Número de VLAN asignado</p>
+                        </div>
+
+                        <div>
+                            <label for="input-nap" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">
+                                NAP <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="input-nap" 
+                                name="nap"
+                                placeholder="Ej: NAP-001-A"
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm"
+                            />
+                            <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-1">Punto de acceso de red</p>
+                        </div>
+
+                        <div>
+                            <label for="input-puerto" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">
+                                Puerto <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="number" 
+                                id="input-puerto" 
+                                name="puerto"
+                                placeholder="Ej: 1"
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm"
+                            />
+                            <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-1">Número de puerto asignado</p>
+                        </div>
+                    </div>
+
+                    <!-- Campo de motivo (solo para solicitudes no factibles) -->
+                    <div id="campo-motivo" class="space-y-4 sm:space-y-6 mb-4 sm:mb-6 hidden">
+                        <div>
+                            <label for="select-motivo" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">
+                                Motivo <span class="text-red-500">*</span>
+                            </label>
+                            <select 
+                                id="select-motivo" 
+                                name="motivo"
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm"
+                            >
+                                <option value="">Seleccionar motivo</option>
+                                <option value="sin cobertura">Sin cobertura en la zona</option>
+                                <option value="sin disponibilidad">Sin disponibilidad en el nodo</option>
+                                <option value="problemas técnicos">Problemas técnicos</option>
+                                <option value="documentación incompleta">Documentación incompleta</option>
+                                <option value="otro">Otro...</option>
+                            </select>
+                            <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-1">Razón por la cual no es factible</p>
+                        </div>
+                    </div>
+
+                    <!-- Campo de observaciones (siempre visible cuando se selecciona una opción) -->
+                    <div id="campo-observaciones" class="space-y-4 sm:space-y-6 mb-4 sm:mb-6 hidden">
+                        <div>
+                            <label for="input-observaciones" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1 sm:mb-2">
+                                Observaciones <span id="observaciones-required" class="text-red-500 hidden">*</span>
+                            </label>
+                            <textarea 
+                                id="input-observaciones" 
+                                name="observaciones"
+                                rows="3"
+                                placeholder="Comentarios adicionales..."
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 dark:bg-dark-bg-secondary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botón de confirmación (se muestra después de seleccionar factible/no factible) -->
+                    <div id="btn-confirmar-container" class="hidden pt-3 sm:pt-4">
+                        <button 
+                            type="submit"
+                            disabled
+                            class="w-full boton boton-principal px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-all transform hover:scale-105 font-medium shadow-lg text-sm sm:text-base opacity-50"
+                        >
+                            <i class="fas fa-save mr-1 sm:mr-2"></i>Confirmar<span class="hidden sm:inline"> y Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de gestión de solicitudes -->
+    <script src="/js/dashboard/verificador/inicializar-solicitudes.js"></script>
+</div>

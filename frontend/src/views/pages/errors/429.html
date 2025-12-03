@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demasiadas solicitudes | ONE Internet</title>
+  <link rel="stylesheet" href="/public/output.css" />
+</head>
+
+<body class="antialiased bg-white text-gray-900 min-h-screen flex flex-col">
+
+  <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-br from-principal-50 via-white to-logo-azul-50">
+    
+      <!-- Número 429 con icono -->
+      <div class="mb-10 text-center w-full">
+        <div class="inline-flex items-center justify-center w-40 h-40 rounded-full bg-principal-100 text-principal-700 mx-auto mb-6">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-bold text-principal-700 mb-4">
+          Demasiadas solicitudes
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 text-center">
+          Hemos recibido muchas solicitudes desde tu IP en un corto periodo de tiempo.
+          Por favor espera unos minutos antes de volver a intentar.
+        </p>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+        <a href="/" class="boton-cta bg-principal-500 text-white hover:bg-principal-600">
+          Ir a Inicio
+        </a>
+        <a href="/dashboard" class="boton-cta border border-principal-500 text-principal-600 hover:bg-principal-50">
+          Volver al Dashboard
+        </a>
+      </div>
+
+      <p class="text-sm text-gray-500 text-center max-w-xl">Si el problema persiste, intenta limpiar la caché de tu navegador o espera 15 minutos. Si crees que esto es un error, contáctanos: <a class="text-principal-600 font-semibold" href="mailto:info@oneinternet.com.ar">info@oneinternet.com.ar</a></p>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 leading-relaxed">Asistencia telefónica, en línea y visitas a domicilio.</p>
+          <p class="text-gray-500 text-xs mt-2">*No incluye daños o desconfiguraciones por el cliente.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600"><a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 transition flex items-center gap-2">+54 9 263 4217506</a></p>
+          <p class="text-gray-600 mt-2"><a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">info@oneinternet.com.ar</a></p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 leading-relaxed">Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida de los ciudadanos de Rivadavia.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Mínimos para evitar más 429 -->
+  <script src="/js/env.js"></script>
+  <script src="/js/utils/logger.js"></script>
+  <script src="/js/utils/footer-anio.js"></script>
+
+</body>
+
+</html>

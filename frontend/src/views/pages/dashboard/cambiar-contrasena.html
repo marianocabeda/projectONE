@@ -1,0 +1,116 @@
+<div id="page-content" class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-8">
+        <div class="md:bg-white dark:md:bg-dark-bg-card md:rounded-2xl md:shadow-lg p-8 transition-all duration-300 max-w-2xl mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-2">Cambiar Contraseña</h1>
+                <p class="text-gray-600 dark:text-dark-text-secondary text-lg">Para tu seguridad, te recomendamos usar una contraseña única que no utilices en otros sitios.</p>
+            </div>
+
+            <!-- Información de seguridad -->
+            <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-blue-800 dark:text-blue-300">Requisitos de seguridad</h3>
+                        <div class="mt-2 text-sm text-blue-700 dark:text-blue-400">
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Al menos 8 caracteres de longitud</li>
+                                <li>Una letra mayúscula y una minúscula</li>
+                                <li>Al menos un número</li>
+                                <li>Al menos un carácter especial (@$!%*?&#)</li>
+                                <li>Diferente a tu contraseña anterior</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <form id="change-password-form" class="max-w-md mx-auto space-y-6">
+                <!-- Contraseña Actual -->
+                <div>
+                    <label for="current-password" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                        Contraseña Actual
+                    </label>
+                    <input 
+                        type="password" 
+                        id="current-password" 
+                        name="actual_password" 
+                        class="block w-full px-4 py-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-principal-500 focus:border-principal-500 transition dark:text-dark-text-primary" 
+                        required 
+                        autocomplete="current-password"
+                        minlength="8"
+                        maxlength="128"
+                        placeholder="••••••••"
+                        aria-label="Contraseña actual"
+                    >
+                </div>
+
+                <!-- Nueva Contraseña -->
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                        Nueva Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="new-password" 
+                        name="nueva_password" 
+                        class="block w-full px-4 py-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-principal-500 focus:border-principal-500 transition dark:text-dark-text-primary" 
+                        required 
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        placeholder="••••••••"
+                        aria-label="Nueva contraseña"
+                    >
+                    <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-2">
+                        Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.
+                    </p>
+                    <!-- El indicador de fortaleza se agregará aquí dinámicamente -->
+                </div>
+
+                <!-- Confirmar Nueva Contraseña -->
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                        Confirmar Nueva Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirm-password" 
+                        name="confirm_password" 
+                        class="block w-full px-4 py-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-principal-500 focus:border-principal-500 transition dark:text-dark-text-primary" 
+                        required 
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        placeholder="••••••••"
+                        aria-label="Confirmar nueva contraseña"
+                    >
+                    <p class="text-xs text-gray-500 dark:text-dark-text-tertiary mt-2">
+                        Debe coincidir con la nueva contraseña
+                    </p>
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="pt-4">
+                    <button 
+                        type="submit" 
+                        id="submit-btn"
+                        disabled
+                        class="w-full boton boton-principal px-6 py-3 font-semibold rounded-lg transition duration-200 shadow-md hover:shadow-lg opacity-50 cursor-not-allowed"
+                    >
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+
+            <!-- Los mensajes de error y éxito se insertarán dinámicamente aquí -->
+        </div>
+    </section>
+
+    <!-- Script del módulo de cambio de contraseña -->
+    <script src="/js/auth/cambiar-contrasena.js"></script>
+</div>

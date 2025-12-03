@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | ONE Internet</title>
+    <link href="/public/output.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <!-- Header se inyectará por JS -->
+    <div id="header"></div>
+
+    <main class="flex-grow mt-0">
+        <!-- Banner Section (igual a index.html) -->
+        <section id="banner" class="relative w-full h-[50vh] md:h-[60vh] flex flex-col md:flex-row overflow-hidden">
+            <!-- Contenedor para el texto -->
+            <div class="w-full md:w-1/3 h-full flex flex-col justify-center items-center bg-gradient-to-b from-[var(--color-azuloscuro)] to-[var(--color-principal)] md:bg-none md:bg-[var(--color-azuloscuro)] relative z-20">
+                <div class="px-6 py-8 md:py-0 md:pl-20 lg:pl-36 flex flex-col items-center md:items-start w-full text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg leading-tight whitespace-nowrap">
+                        ONE internet
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-medium text-white/90 drop-shadow-lg mt-2 leading-relaxed whitespace-nowrap">
+                        Excelentes servicios </br> para grandes personas...
+                    </h2>
+                </div>
+            </div>
+            <!-- Contenedor para la imagen -->
+            <div class="w-full md:w-2/3 h-full relative overflow-hidden hidden md:flex">
+                <img src="/images/backgrounds/acercade.png" alt="Banner Acerca de Nosotros" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy">
+                <div class="absolute inset-0 z-10 banner-degradado"></div>
+            </div>
+        </section>
+
+        <div class="py-16 px-4 md:px-6 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <!-- Contenido en dos columnas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Columna de Texto -->
+                    <div class="prose lg:prose-lg text-gray-700 text-justify fade-in">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-principal-600 to-principal-400 text-transparent bg-clip-text">
+                            Acerca de Nosotros
+                        </h1>
+                        <p>
+                            <strong>CREA SERVICIOS TECNOLÓGICOS SAPEM</strong> es el resultado de la unión de los esfuerzos de la Municipalidad de Rivadavia y la Cooperativa Eléctrica y Anexos Popular Rivadavia Ltda. que mediante un acuerdo de cooperación, relanzaron un proceso de fortalecimiento institucional y de colaboración técnica, que implicó un replanteo del Servicio de Internet de Rivadavia y la unificación en la prestación de dicho servicio de ambas instituciones, naciendo de esta manera la primer unidad de negocio conjunto ONE internet.
+                        </p>
+                        <p>
+                            Finalmente, a partir del 17 de mayo 2019 nace CREA una empresa de servicios tecnológicos cuyo fin es responder eficientemente a las necesidades funcionales del mundo de hoy y del futuro próximo, en base a un modelo de integración y búsqueda del bien común, que garantice al vecino de Rivadavia - Mendoza un amplio acceso a la información y una adecuada prestación de los servicios digitales, en condiciones de calidad, continuidad, y precios justos.
+                        </p>
+                        <p>
+                            Somos un equipo de apasionados, con amplia experiencia en redes de datos, con un objetivo común: contribuir para mejorar la calidad de vida de todos los ciudadanos de Rivadavia.
+                        </p>
+                    </div>
+
+                    <!-- Columna de Video -->
+                    <div class="fade-in">
+                        <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-xl border border-gray-200 hover-scale">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/AQ8S26M9msc?feature=oembed" title="ONEinternet - Video Institucional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+                <!-- Servicio Técnico -->
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+                    <p class="text-gray-600 leading-relaxed">Asistencia telefónica, en línea y visitas a domicilio.</p>
+                    <p class="text-gray-500 text-xs mt-2">*No incluye daños o desconfiguraciones por el cliente.</p>
+                </div>
+                <!-- Contacto -->
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+                    <p class="text-gray-600">
+                        <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 transition flex items-center gap-2">
+                            +54 9 263 4217506
+                        </a>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">info@oneinternet.com.ar</a>
+                    </p>
+                </div>
+                <!-- Acerca de -->
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+                    <p class="text-gray-600 leading-relaxed">Somos un equipo apasionado con experiencia en redes de datos, comprometidos con mejorar la calidad de vida de los ciudadanos de Rivadavia.</p>
+                </div>
+            </div>
+            <!-- Pie de página inferior -->
+            <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+                <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/env.js"></script>
+    <script src="/js/utils/logger.js"></script>
+    <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+    <script src="/js/config.js"></script>
+    <script type="module" src="/js/encabezado-publico.js"></script>
+    <script src="/js/pages/acercade.js"></script>
+</body>
+</html>

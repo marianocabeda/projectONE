@@ -1,0 +1,46 @@
+<div id="page-content" class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="md:bg-white md:dark:bg-dark-bg-card md:p-4 sm:md:p-6 md:rounded-xl md:border md:border-gray-200 md:dark:border-dark-border-primary md:shadow-sm transition-colors duration-300">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-800 dark:text-dark-text-primary mb-1">Mis Facturas</h1>
+                <p class="text-gray-600 dark:text-dark-text-secondary">Aquí podrás consultar y descargar tus facturas.</p>
+            </div>
+            <div class="w-full sm:w-auto">
+                <label for="connection-filter" class="sr-only">Filtrar por conexión</label>
+                <select id="connection-filter" name="connection-filter" class="w-full sm:w-64 block pl-3 pr-10 py-2 text-base border-gray-300 dark:border-dark-border-primary focus:outline-none focus:ring-principal-500 dark:focus:ring-dark-principal-600 focus:border-principal-500 dark:focus:border-dark-principal-600 rounded-md shadow-sm bg-white dark:bg-dark-bg-secondary text-gray-900 dark:text-dark-text-primary transition-colors">
+                    <option value="all">Todas las conexiones</option>
+                    <option value="CON-001">CON-001 (Calle Falsa 123)</option>
+                    <option value="CON-002">CON-002 (Av. Siempre Viva 742)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Contenedor de la tabla para responsividad -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left hidden md:table">
+                <thead>
+                    <tr class="border-b border-gray-200 dark:border-dark-border-primary bg-gray-50 dark:bg-dark-bg-tertiary transition-colors">
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Nro. Factura</th>
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Período</th>
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Vencimiento</th>
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Monto</th>
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Estado</th>
+                        <th class="py-3 px-4 text-sm font-semibold text-gray-500 dark:text-dark-text-secondary">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="invoices-table-body" class="divide-y divide-gray-200 dark:divide-dark-border-primary">
+                    <!-- Las filas se generarán dinámicamente -->
+                    <tr>
+                        <td colspan="6" class="py-8 text-center text-gray-500 dark:text-dark-text-secondary">Cargando facturas...</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Vista de tarjetas para móviles (visible por defecto, oculto en md y superior) -->
+            <div id="invoices-mobile-cards" class="grid grid-cols-1 gap-4 md:hidden">
+                <!-- Las tarjetas se generarán dinámicamente -->
+                <div class="p-4 text-center text-gray-500 dark:text-dark-text-secondary">Cargando facturas...</div>
+            </div>
+        </div>
+    </section>
+    <script src="/js/dashboard/cliente/facturas.js"></script>
+</div>

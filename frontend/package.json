@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@parcel/watcher": "^2.5.1",
+    "@tailwindcss/cli": "^4.1.17",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pdfjs-dist": "^5.4.449",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "jasmine": "^5.12.0"
+  },
+  "scripts": {
+    "test": "jasmine",
+    "start": "node server.js",
+    "restart": "./restart-server.sh",
+    "build:css": "npx tailwindcss -i src/assets/css/input.css -o public/output.css --minify",
+    "watch:css": "npx tailwindcss -i src/assets/css/input.css -o public/output.css --watch"
+  },
+  "name": "contratos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

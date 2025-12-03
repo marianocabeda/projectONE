@@ -1,0 +1,237 @@
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Login | ONE Internet</title>
+
+  <!-- Tema y estilos -->
+  <link href="/public/output.css" rel="stylesheet" />
+</head>
+
+<body
+  class="font-sans flex flex-col min-h-screen bg-gray-50 overflow-x-hidden"
+>
+  <!-- HEADER dinámico -->
+  <div id="header"></div>
+
+  <!-- Elementos decorativos y formulario -->
+  <main
+    class="flex items-center justify-center py-12"
+  >
+
+    <!-- Contenedor principal -->
+    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div id="login-form-root" class="w-full max-w-lg mx-auto">
+        <form
+          id="login-form"
+          class="p-8 rounded-2xl shadow-xl border border-gray-200 bg-white"
+          aria-labelledby="login-heading"
+        >
+          <!-- Encabezado institucional -->
+          <div class="text-center mb-6">
+            <img
+              src="/images/logos/one-negro.png"
+              alt="Logo de la empresa"
+              class="mx-auto h-24"
+            />
+          </div>
+                <!-- Título -->
+          <div class="text-center mb-10">
+            <h1 id="page-title" class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Accede a tu cuenta</h1>
+            <p id="page-desc" class="text-gray-500 text-base md:text-lg">Ingresa tus credenciales para gestionar tus servicios.</p>
+          </div>
+
+          <label
+            for="login-email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Correo electrónico</label
+          >
+          <input
+            id="login-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            data-validate="email"
+            data-sanitize="email"
+            maxlength="254"
+            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm mb-4 focus:outline-none focus:ring-principal-500 focus:border-principal-500"
+            placeholder="tu@correo.com"
+            aria-label="Correo electrónico"
+            aria-describedby="email-hint"
+          />
+          <span id="email-hint" class="sr-only">Ingresa tu correo electrónico registrado</span>
+          
+          <label
+            for="login-password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >Contraseña</label>
+
+          <div class="relative">
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              minlength="8"
+              maxlength="128"
+              class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 pr-12"
+              placeholder="••••••••"
+              aria-label="Contraseña"
+              aria-describedby="password-hint"
+            />
+
+            <!-- Botón ojito -->
+            <button
+              type="button"
+              id="toggle-password"
+              aria-label="Mostrar u ocultar contraseña"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <!-- Eye -->
+              <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 block"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 
+                    4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+
+              <!-- Eye off -->
+              <svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 hidden"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.957 
+                    9.957 0 012.249-3.742m3.788-2.594A9.956 9.956 0 0112 5c4.477 0 8.268 
+                    2.943 9.542 7a9.97 9.97 0 01-4.043 5.33M15 12a3 3 0 00-3-3" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 3l18 18" />
+              </svg>
+            </button>
+          </div>
+
+          <span id="password-hint" class="sr-only">Ingresa tu contraseña</span>
+
+
+          <!-- Enlace de recuperación de contraseña -->
+          <div class="text-right mb-4">
+            <a
+              href="/forgot-password"
+              class="text-sm font-medium text-principal-600 hover:text-principal-500 transition"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            id="login-submit"
+            class="block text-center w-full boton boton-principal px-6 py-2.5 rounded-lg transition"
+          >
+            Iniciar sesión
+          </button>
+
+          <div id="login-error" class="text-sm text-red-600 mt-3 hidden">
+            <!-- Los mensajes de error se insertarán aquí -->
+          </div>
+
+          <!-- Contenedor para reenviar verificación -->
+          <div id="resend-container" class="hidden mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p class="text-sm text-yellow-800 mb-2">¿No recibiste el correo de verificación?</p>
+            <button id="resend-btn" type="button" class="text-sm text-principal-600 hover:text-principal-700 font-medium">
+              Reenviar correo de verificación
+            </button>
+            <p id="resend-status" class="text-xs mt-2"></p>
+          </div>
+
+          <div class="mt-6 text-center text-sm text-gray-600">
+            ¿No tenés cuenta?
+            <a
+              href="/registro"
+              class="font-medium text-principal-600 hover:text-principal-500"
+              >Registrate</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Asistencia telefónica, en línea y visitas a domicilio.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            *No incluye daños o desconfiguraciones por el cliente.
+          </p>
+        </div>
+
+        <!-- Centro -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">Contáctenos</h3>
+          <p class="text-gray-600">
+            <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-blue-600 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 mt-2">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-blue-600 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Derecha -->
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 text-lg">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Somos un equipo apasionado y con amplia experiencia en redes de datos, comprometido con un propósito común: mejorar la calidad de vida de los ciudadanos de Rivadavia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 md:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts movidos al final -->
+  <!-- Variables de entorno (primero) -->
+  <script src="/js/env.js"></script>
+  <!-- Sistema de seguridad -->
+  <script src="/js/utils/logger.js"></script>
+  <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+  <!-- Configuración (usa las variables) -->
+  <script src="/js/config.js"></script>
+  <!-- Verificar si ya está autenticado y redirigir -->
+  <script src="/js/auth/redirigir-si-autenticado.js"></script>
+  <!-- Utilidades -->
+  <script src="/js/utils/validators.js"></script>
+  <script src="/js/utils/sanitizer.js"></script>
+  <script src="/js/utils/manejador-errores.js"></script>
+  <script src="/js/utils/http.js"></script>
+  <!-- Componente global de modal de errores -->
+  <script src="/js/ui/modal-error.js"></script>
+  <!-- Sistema de autenticación -->
+  <script src="/js/auth/token.js"></script>
+  <!-- Restaurar sesión automáticamente -->
+  <script src="/js/auth/restaurar-sesion.js"></script>
+  <!-- Header -->
+  <script type="module" src="/js/encabezado-publico.js"></script>
+  <!-- Lógica de login -->
+  <script src="/js/auth/login/inicio-sesion.js"></script>
+</body>
+</html>

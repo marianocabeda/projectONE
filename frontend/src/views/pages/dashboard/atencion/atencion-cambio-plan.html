@@ -1,0 +1,150 @@
+<!-- Módulo: Cambio de Plan -->
+<!--
+    Partial: this fragment is embedded inside the dashboard shell.
+    
+    Do NOT add <head> or <link> tags here — keep this file as a partial.
+-->
+<div class="min-h-screen bg-principal-50 dark:bg-dark-bg-primary p-2 sm:p-4 md:p-8 transition-colors duration-300">
+    <div class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <button id="btn-volver" class="flex items-center text-gray-600 dark:text-dark-text-secondary hover:text-gray-800 dark:hover:text-dark-text-primary transition-colors px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-tertiary">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="text-sm sm:text-base">Volver</span>
+                </button>
+                <div class="text-left sm:text-right">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-dark-text-primary">Cambio de Plan</h1>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-dark-text-secondary">Upgrade o Downgrade de servicios</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Búsqueda de Cliente -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300" id="seccion-busqueda">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-dark-text-primary mb-4 sm:mb-6">Buscar Cliente</h2>
+            <p class="text-gray-600 dark:text-dark-text-secondary mb-6">Busca el cliente por documento o email para gestionar su cambio de plan.</p>
+            
+            <!-- Componente Buscador Reutilizable -->
+            <div id="buscador-cambio-plan-container"></div>
+
+        <!-- Información del Cliente -->
+        <div id="seccion-cliente" class="hidden">
+            <div class="dashboard-card mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="dashboard-subtitle">Información del Cliente</h2>
+                    <button id="btn-nueva-busqueda" class="boton boton-blanco px-4 py-2 border border-gray-300 text-sm">
+                        Nueva Búsqueda
+                    </button>
+                </div>
+                
+                <div id="info-cliente" class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-tarjeta-azul-50 rounded-lg p-4">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Conexiones Actuales -->
+            <div class="dashboard-card mb-6">
+                <h2 class="dashboard-subtitle mb-4">Conexiones Actuales</h2>
+                <div id="conexiones-container">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Selección de Nuevo Plan -->
+            <div id="seccion-nuevo-plan" class="hidden">
+                <div class="dashboard-card">
+                    <h2 class="dashboard-subtitle mb-4">Seleccionar Nuevo Plan</h2>
+                    
+                    <div class="bg-advertencia-50 border border-advertencia-200 rounded-lg p-4 mb-6">
+                        <p class="text-sm text-advertencia-800">
+                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            El contrato actual será dado de baja automáticamente y se generará uno nuevo con el plan seleccionado.
+                        </p>
+                    </div>
+
+                    <div id="plan-actual" class="mb-6">
+                        <!-- Plan actual -->
+                    </div>
+
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-3">Planes Disponibles</h3>
+                    <div id="planes-disponibles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <!-- Se llenarán los planes -->
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button id="btn-cancelar-cambio" class="boton-secundario">
+                            Cancelar
+                        </button>
+                        <button id="btn-confirmar-cambio" class="boton-principal" disabled>
+                            Confirmar Cambio de Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div id="modal-confirmacion" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Confirmar Cambio de Plan</h3>
+            
+            <div class="space-y-4 mb-6">
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-gray-800 mb-2">Plan Anterior</h4>
+                    <div id="modal-plan-anterior" class="text-sm text-gray-700">
+                        <!-- Información del plan anterior -->
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </div>
+
+                <div class="bg-tarjeta-azul-50 border border-logo-azul-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-logo-azul-900 mb-2">Plan Nuevo</h4>
+                    <div id="modal-plan-nuevo" class="text-sm text-logo-azul-800">
+                        <!-- Información del plan nuevo -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <p class="text-sm text-yellow-800">
+                    ℹ️ Se generará un nuevo contrato y se imprimirá en PDF automáticamente.
+                </p>
+            </div>
+
+            <div class="flex justify-end space-x-4">
+                <button id="btn-modal-cancelar" class="boton-secundario">
+                    Cancelar
+                </button>
+                <button id="btn-modal-confirmar" class="boton-principal">
+                    Confirmar y Generar Contrato
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 flex flex-col items-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-logo-azul-500 mb-4"></div>
+        <p class="text-gray-700" id="loading-text">Procesando...</p>
+    </div>
+</div>
+
+<!-- Script del Módulo -->
+<script src="/js/dashboard/atencion/atencion-cambio-plan.js"></script>

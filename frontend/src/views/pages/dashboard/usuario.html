@@ -1,0 +1,242 @@
+    <div id="page-content" class="w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6">
+    
+    <!-- Encabezado del perfil -->
+    <div class="bg-white dark:bg-dark-bg-card rounded-lg shadow p-4 sm:p-6 mb-4 sm:mb-6 transition-colors duration-300">
+        <div class="flex flex-col items-center gap-4 sm:gap-6 max-w-3xl mx-auto">
+
+
+            <div class="relative group cursor-pointer">
+                <img id="profile-picture" src="/images/decoration/default.png" 
+                     alt="Foto de perfil" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover bg-gray-200 transition-opacity group-hover:opacity-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span class="text-sm font-medium text-gray-700">Agregar imagen</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 id="user-name" class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-dark-text-primary">Cargando...</h1>
+                <p id="user-email" class="text-sm sm:text-base text-gray-600 dark:text-dark-text-secondary mt-1"></p>
+                <p id="user-member-since" class="text-xs sm:text-sm text-gray-500 dark:text-dark-text-tertiary mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información Personal -->
+    <div class="bg-white dark:bg-dark-bg-card rounded-lg shadow p-4 sm:p-6 mb-4 sm:mb-6 transition-colors duration-300">
+        <div class="flex justify-between items-center mb-3 sm:mb-4 max-w-3xl mx-auto">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-dark-text-primary">Información Personal</h2>
+        </div>
+        <form data-section="personal" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Nombre</label>
+                <input type="text" name="nombre" id="nombre" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="apellido" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Apellido</label>
+                <input type="text" name="apellido" id="apellido" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="dni" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">DNI</label>
+                <input type="text" name="dni" id="dni" data-editable="false"
+                       class="mt-1 block w-full px-3 py-2 bg-gray-100 dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm sm:text-sm dark:text-dark-text-tertiary cursor-not-allowed transition-colors" 
+                       disabled readonly>
+            </div>
+            <div>
+                <label for="cuil" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">CUIL</label>
+                <input type="text" name="cuil" id="cuil" data-editable="false"
+                       class="mt-1 block w-full px-3 py-2 bg-gray-100 dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm sm:text-sm dark:text-dark-text-tertiary cursor-not-allowed transition-colors" 
+                       disabled readonly>
+            </div>
+            <div>
+                <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Fecha de Nacimiento</label>
+                <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" data-editable="false"
+                       class="mt-1 block w-full px-3 py-2 bg-gray-100 dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm sm:text-sm dark:text-dark-text-tertiary cursor-not-allowed transition-colors" 
+                       disabled readonly>
+            </div>
+            <div>
+                <label for="sexo" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Sexo</label>
+                <input type="text" name="sexo" id="sexo" data-editable="false"
+                       class="mt-1 block w-full px-3 py-2 bg-gray-100 dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm sm:text-sm dark:text-dark-text-tertiary cursor-not-allowed transition-colors" 
+                       disabled readonly>
+            </div>
+            
+            <!-- Botones de acción (ocultos por defecto) -->
+            <div class="col-span-1 md:col-span-2 flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 mt-4 hidden" data-view="actions">
+                <button type="button" data-action="cancel" 
+                        class="w-full sm:w-auto boton boton-gris-discreto order-2 sm:order-1">
+                    Cancelar
+                </button>
+                <button type="submit" data-action="save" 
+                        class="w-full sm:w-auto boton boton-principal order-1 sm:order-2">
+                    Guardar
+                </button>
+            </div>
+            
+            <!-- Botón de editar -->
+            <div class="col-span-1 md:col-span-2 flex justify-end mt-2">
+                <button type="button" data-action="edit" 
+                        class="w-full sm:w-auto boton boton-azul-claro text-sm">
+                    Editar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Datos de Contacto -->
+    <div class="bg-white dark:bg-dark-bg-card rounded-lg shadow p-6 mb-6 transition-colors duration-300">
+        <div class="flex justify-between items-center mb-4 max-w-3xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-dark-text-primary">Datos de Contacto</h2>
+        </div>
+        <form data-section="contacto" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Email</label>
+                <input type="email" name="email" id="email" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="telefono" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Teléfono</label>
+                <!-- Input normal para visualización -->
+                <input type="tel" name="telefono" id="telefono" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+                <!-- Contenedor para PhoneInput (oculto por defecto) -->
+                <div id="telefono-widget-container" class="hidden"></div>
+            </div>
+            <div>
+                <label for="telefono_alternativo" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Teléfono Alternativo</label>
+                <!-- Input normal para visualización -->
+                <input type="tel" name="telefono_alternativo" id="telefono_alternativo" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+                <!-- Contenedor para PhoneInput (oculto por defecto) -->
+                <div id="telefono_alternativo-widget-container" class="hidden"></div>
+            </div>
+            
+            <div class="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4 hidden" data-view="actions">
+                <button type="button" data-action="cancel" 
+                        class="boton boton-gris-discreto">
+                    Cancelar
+                </button>
+                <button type="submit" data-action="save" 
+                        class="boton boton-principal">
+                    Guardar
+                </button>
+            </div>
+            
+            <!-- Botón de editar -->
+            <div class="col-span-1 md:col-span-2 flex justify-end mt-2">
+                <button type="button" data-action="edit" 
+                        class="w-full sm:w-auto boton boton-azul-claro text-sm">
+                    Editar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Domicilio -->
+    <div class="bg-white dark:bg-dark-bg-card rounded-lg shadow p-6 transition-colors duration-300">
+        <div class="flex justify-between items-center mb-4 max-w-3xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-dark-text-primary">Domicilio</h2>
+        </div>
+        <form data-section="domicilio" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div>
+                <label for="calle" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Calle</label>
+                <input type="text" name="calle" id="calle" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="numero" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Número</label>
+                <input type="text" name="numero" id="numero" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="codigo_postal" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Código Postal</label>
+                <input type="text" name="codigo_postal" id="codigo_postal" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="piso" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Piso</label>
+                <input type="text" name="piso" id="piso" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="depto" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Departamento</label>
+                <input type="text" name="depto" id="depto" data-editable="true"
+                       class="mt-1 block w-full px-3 py-2 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 sm:text-sm dark:text-dark-text-primary transition-colors" 
+                       disabled>
+            </div>
+            <div>
+                <label for="provincia-btn" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Provincia</label>
+                <div class="relative">
+                    <button type="button" id="provincia-btn" data-editable="true"
+                            class="mt-1 flex items-center justify-between w-full text-left px-3 py-2 pr-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 transition-colors" 
+                            aria-haspopup="listbox" aria-expanded="false" disabled> 
+                        <span class="provincia-label text-gray-900 dark:text-dark-text-primary">-</span>
+                        <span class="provincia-chevron text-gray-400 dark:text-dark-text-tertiary">⌄</span>
+                    </button>
+                    <div id="provincia-overlay" class="hidden"></div>
+                </div>
+            </div>
+            <div>
+                <label for="municipio-btn" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Municipio</label>
+                <div class="relative">
+                    <button type="button" id="municipio-btn" data-editable="true"
+                            class="mt-1 flex items-center justify-between w-full text-left px-3 py-2 pr-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 transition-colors" 
+                            aria-haspopup="listbox" aria-expanded="false" disabled> 
+                        <span class="municipio-label text-gray-900 dark:text-dark-text-primary">-</span>
+                        <span class="municipio-chevron text-gray-400 dark:text-dark-text-tertiary">⌄</span>
+                    </button>
+                    <div id="municipio-overlay" class="hidden"></div>
+                </div>
+            </div>
+            <div>
+                <label for="distrito-btn" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">Distrito</label>
+                <div class="relative">
+                    <button type="button" id="distrito-btn" data-editable="true"
+                            class="mt-1 flex items-center justify-between w-full text-left px-3 py-2 pr-3 bg-white dark:bg-dark-bg-tertiary border border-gray-300 dark:border-dark-border-primary rounded-md shadow-sm focus:outline-none focus:ring-principal-500 focus:border-principal-500 transition-colors" 
+                            aria-haspopup="listbox" aria-expanded="false" disabled> 
+                        <span class="distrito-label text-gray-900 dark:text-dark-text-primary">-</span>
+                        <span class="distrito-chevron text-gray-400 dark:text-dark-text-tertiary">⌄</span>
+                    </button>
+                    <div id="distrito-overlay" class="hidden"></div>
+                </div>
+            </div>
+            
+            <div class="col-span-1 md:grid-cols-2 flex justify-end gap-3 mt-4 hidden" data-view="actions">
+                <button type="button" data-action="cancel" 
+                        class="boton boton-gris-discreto">
+                    Cancelar
+                </button>
+                <button type="submit" data-action="save" 
+                        class="boton boton-principal">
+                    Guardar
+                </button>
+            </div>
+            
+            <!-- Botón de editar -->
+            <div class="col-span-1 md:col-span-2 flex justify-end mt-2">
+                <button type="button" data-action="edit" 
+                        class="w-full sm:w-auto boton boton-azul-claro text-sm">
+                    Editar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts de la página de perfil -->
+    <script src="/js/utils/validators.js"></script>
+    <script src="/js/utils/sanitizer.js"></script>
+    <script src="/js/utils/gestor-cache.js"></script>
+    <script src="/js/utils/ayudantes-dom.js"></script>
+    <script src="/js/utils/selector-personalizado.js"></script>
+    <script src="/js/utils/entrada-telefono.js"></script>
+    <script src="/js/utils/cargador-datos-geo.js"></script>
+    <script src="/js/dashboard/cliente/usuario.js"></script>

@@ -1,0 +1,66 @@
+    <div id="page-content" class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section>
+            <h1 class="dashboard-title">Velocidad de mi Plan</h1>
+            <p class="dashboard-subtitle">Visualiza la velocidad de tu plan contratado.</p>
+
+            <div class="mt-8 flex flex-col items-center justify-center text-center md:bg-white md:dark:bg-dark-bg-card md:rounded-2xl md:p-8 md:border md:border-gray-200 md:dark:border-dark-border-primary md:shadow-lg transition-colors duration-300">
+                <h2 id="plan-name" class="text-xl font-semibold text-gray-700 dark:text-dark-text-secondary mb-2"></h2>
+                
+                <!-- Speedometer Component -->
+                <div class="speedometer">
+                    <!-- Background Arc -->
+                    <div class="speedometer-arc bg-gray-200"></div>
+                    <!-- Progress Arc -->
+                    <div id="speed-progress" class="speedometer-arc bg-principal-500"></div>
+                    
+                    <!-- Needle -->
+                    <div id="speed-needle" class="speedometer-needle"></div>
+                    <div class="speedometer-center"></div>
+
+                    <!-- Speed Value -->
+                    <div class="absolute bottom-0 w-full">
+                        <span id="speed-value" class="text-5xl font-black text-principal-800 dark:text-dark-text-primary tracking-tight"></span>
+                        <span class="text-xl font-bold text-gray-500 dark:text-dark-text-tertiary">Mbps</span>
+                    </div>
+                </div>
+
+                <!-- Labels -->
+                <div class="w-full max-w-xs flex justify-between text-xs text-gray-400 dark:text-dark-text-tertiary mt-2 mb-8">
+                    <span>0</span>
+                    <span>500</span>
+                    <span>1000</span>
+                </div>
+
+                <!-- Detalles del Plan -->
+                <div class="w-full max-w-md border-t border-gray-200 dark:border-dark-border-primary pt-6 mt-6 transition-colors">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-dark-text-primary mb-4">Detalles del Plan</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div class="info-item">
+                            <span class="label">Precio Mensual</span>
+                            <span id="plan-price" class="value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Próximo Pago</span>
+                            <span id="plan-next-payment" class="value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Velocidad Subida</span>
+                            <span id="plan-upload-speed" class="value"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-8 text-gray-600 dark:text-dark-text-secondary">Para cambios de plan o consultas, por favor gestionalo desde <a href="/conexiones" data-page="conexiones" class="text-principal-600 dark:text-dark-principal-600 font-medium hover:underline">Mis Conexiones</a>.</p>
+
+                <!-- Botón de baja de servicio -->
+                <div class="w-full border-t border-gray-200 dark:border-dark-border-primary mt-8 pt-6 text-center transition-colors">
+                    <button class="boton boton-gris-discreto">
+                        Solicitar la baja del servicio
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- La lógica de esta página se ha movido a /js/utils/planes.js -->
+    <script src="/js/utils/planes.js"></script>

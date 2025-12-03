@@ -1,0 +1,1140 @@
+@import "tailwindcss";
+
+/* Configuramos el modo de dark mode para usar clase en lugar de media query */
+@variant dark (&:is(.dark *));
+
+/* Definimos los colores personalizados con rangos */
+@theme {
+
+  /* Principal */
+  --color-principal: #104F87; /* #104F87 */
+  --color-principal-50: #E6F0FA; /* #E6F0FA */
+  --color-principal-100: #BFD9F0; /* #BFD9F0 */
+  --color-principal-200: #99C1E6; /* #99C1E6 */
+  --color-principal-300: #73A9DC; /* #73A9DC */
+  --color-principal-400: #4D91D2; /* #4D91D2 */
+  --color-principal-500: #104F87; /* #104F87 */  /* #color principal*/
+  --color-principal-600: #0D3E6A; /* #0D3E6A */
+  --color-principal-700: #0A2E4D; /* #0A2E4D */
+  --color-principal-800: #061F31; /* #061F31 */
+  --color-principal-900: #031018; /* #031018 */
+
+  /* Tarjeta Amarillo */
+  --color-tarjeta-amarillo: #FABF74; /* #FABF74 */
+  --color-tarjeta-amarillo-50: #FFF8F0; /* #FFF8F0 */
+  --color-tarjeta-amarillo-100: #FFEDC9; /* #FFEDC9 */
+  --color-tarjeta-amarillo-200: #FFE2A3; /* #FFE2A3 */
+  --color-tarjeta-amarillo-300: #FFD87D; /* #FFD87D */
+  --color-tarjeta-amarillo-400: #FFCD56; /* #FFCD56 */
+  --color-tarjeta-amarillo-500: #FABF74; /* #FABF74 */ /* #color principal*/
+  --color-tarjeta-amarillo-600: #E6A85E; /* #E6A85E */
+  --color-tarjeta-amarillo-700: #C38F4B; /* #C38F4B */
+  --color-tarjeta-amarillo-800: #9F7339; /* #9F7339 */
+  --color-tarjeta-amarillo-900: #7C5729; /* #7C5729 */
+
+  --color-tarjeta-amarillo-500: #FABF74; /* #FABF74 */
+  --color-tarjeta-verde-500: #AED084; /* #AED084 */
+  --color-tarjeta-azul-500: #7ECFF5; /* #7ECFF5 */
+
+  /* Tarjeta Verde */
+  --color-tarjeta-verde: #AED084; /* #AED084 */
+  --color-tarjeta-verde-50: #F0FAF2; /* #F0FAF2 */
+  --color-tarjeta-verde-100: #C9F0D4; /* #C9F0D4 */
+  --color-tarjeta-verde-200: #A3E6B6; /* #A3E6B6 */
+  --color-tarjeta-verde-300: #7DD998; /* #7DD998 */
+  --color-tarjeta-verde-400: #56CD7A; /* #56CD7A */
+  --color-tarjeta-verde-500: #AED084; /* #AED084 */ /* #color principal*/
+  --color-tarjeta-verde-600: #92B96E; /* #92B96E */
+  --color-tarjeta-verde-700: #769E59; /* #769E59 */
+  --color-tarjeta-verde-800: #5A8345; /* #5A8345 */
+  --color-tarjeta-verde-900: #3E6731; /* #3E6731 */
+
+  /* Tarjeta Azul */
+  --color-tarjeta-azul: #7ECFF5; /* #7ECFF5 */
+  --color-tarjeta-azul-50: #E6F7FF; /* #E6F7FF */
+  --color-tarjeta-azul-100: #BFEFFF; /* #BFEFFF */
+  --color-tarjeta-azul-200: #99E7FF; /* #99E7FF */
+  --color-tarjeta-azul-300: #73DFFF; /* #73DFFF */
+  --color-tarjeta-azul-400: #4DD7FF; /* #4DD7FF */
+  --color-tarjeta-azul-500: #7ECFF5; /* #7ECFF5 */  /* #color principal*/
+  --color-tarjeta-azul-600: #67B8DB; /* #67B8DB */
+  --color-tarjeta-azul-700: #509FC1; /* #509FC1 */
+  --color-tarjeta-azul-800: #3987A7; /* #3987A7 */
+  --color-tarjeta-azul-900: #21708D; /* #21708D */
+
+  /* Logo Naranja */
+  --color-logo-naranja: #ECA348; /* #ECA348 */
+  --color-logo-naranja-50: #FFF5EB; /* #FFF5EB */
+  --color-logo-naranja-100: #FFE3C7; /* #FFE3C7 */
+  --color-logo-naranja-200: #FFD1A3; /* #FFD1A3 */
+  --color-logo-naranja-300: #FFBF7F; /* #FFBF7F */
+  --color-logo-naranja-400: #FFAD5B; /* #FFAD5B */
+  --color-logo-naranja-500: #ECA348; /* #ECA348 */ /* #color principal*/
+
+  /* Logo Verde */
+  --color-logo-verde: #74B545; /* #74B545 */
+  --color-logo-verde-50: #F0FAF0; /* #F0FAF0 */
+  --color-logo-verde-100: #C9F0C9; /* #C9F0C9 */
+  --color-logo-verde-200: #A3E6A3; /* #A3E6A3 */
+  --color-logo-verde-300: #7DD97D; /* #7DD97D */
+  --color-logo-verde-400: #56CD56; /* #56CD56 */
+  --color-logo-verde-500: #74B545; /* #74B545 */  /* #color principal*/
+
+  /* Logo Azul */
+  --color-logo-azul: #01A5E3; /* #01A5E3 */
+  --color-logo-azul-50: #E6F7FF; /* #E6F7FF */
+  --color-logo-azul-100: #BFEFFF; /* #BFEFFF */
+  --color-logo-azul-200: #99E7FF; /* #99E7FF */
+  --color-logo-azul-300: #73DFFF; /* #73DFFF */
+  --color-logo-azul-400: #4DD7FF; /* #4DD7FF */
+  --color-logo-azul-500: #01A5E3; /* #01A5E3 */   /* #color principal*/
+
+  /* Icono Azul */
+  --color-icono-azul: #104F87; /* #104F87 */  
+  --color-icono-azul-50: #E6F0FA; /* #E6F0FA */
+  --color-icono-azul-100: #BFD9F0; /* #BFD9F0 */
+  --color-icono-azul-200: #99C1E6; /* #99C1E6 */
+  --color-icono-azul-300: #73A9DC; /* #73A9DC */
+  --color-icono-azul-400: #4D91D2; /* #4D91D2 */
+  --color-icono-azul-500: #104F87; /* #104F87 */  /* #color principal*/
+  
+  /* Estados - Éxito (Verde) */
+  --color-exito: #10b981; /* #10b981 - green-500 */
+  --color-exito-50: #ecfdf5; /* #ecfdf5 */
+  --color-exito-100: #d1fae5; /* #d1fae5 */
+  --color-exito-200: #a7f3d0; /* #a7f3d0 */
+  --color-exito-300: #6ee7b7; /* #6ee7b7 */
+  --color-exito-400: #34d399; /* #34d399 */
+  --color-exito-500: #10b981; /* #10b981 */ /* #color principal*/
+  --color-exito-600: #059669; /* #059669 */
+  --color-exito-700: #047857; /* #047857 */
+  --color-exito-800: #065f46; /* #065f46 */
+  --color-exito-900: #064e3b; /* #064e3b */
+
+  /* Estados - Error (Rojo) */
+  --color-error: #ef4444; /* #ef4444 - red-500 */
+  --color-error-50: #fef2f2; /* #fef2f2 */
+  --color-error-100: #fee2e2; /* #fee2e2 */
+  --color-error-200: #fecaca; /* #fecaca */
+  --color-error-300: #fca5a5; /* #fca5a5 */
+  --color-error-400: #f87171; /* #f87171 */
+  --color-error-500: #ef4444; /* #ef4444 */ /* #color principal*/
+  --color-error-600: #dc2626; /* #dc2626 */
+  --color-error-700: #b91c1c; /* #b91c1c */
+  --color-error-800: #991b1b; /* #991b1b */
+  --color-error-900: #7f1d1d; /* #7f1d1d */
+
+  /* Estados - Advertencia (Amarillo/Naranja) */
+  --color-advertencia: #f59e0b; /* #f59e0b - amber-500 */
+  --color-advertencia-50: #fffbeb; /* #fffbeb */
+  --color-advertencia-100: #fef3c7; /* #fef3c7 */
+  --color-advertencia-200: #fde68a; /* #fde68a */
+  --color-advertencia-300: #fcd34d; /* #fcd34d */
+  --color-advertencia-400: #fbbf24; /* #fbbf24 */
+  --color-advertencia-500: #f59e0b; /* #f59e0b */ /* #color principal*/
+  --color-advertencia-600: #d97706; /* #d97706 */
+  --color-advertencia-700: #b45309; /* #b45309 */
+  --color-advertencia-800: #92400e; /* #92400e */
+  --color-advertencia-900: #78350f; /* #78350f */
+
+  /* Estados - Información (Azul) */
+  --color-info: #3b82f6; /* #3b82f6 - blue-500 */
+  --color-info-50: #eff6ff; /* #eff6ff */
+  --color-info-100: #dbeafe; /* #dbeafe */
+  --color-info-200: #bfdbfe; /* #bfdbfe */
+  --color-info-300: #93c5fd; /* #93c5fd */
+  --color-info-400: #60a5fa; /* #60a5fa */
+  --color-info-500: #3b82f6; /* #3b82f6 */ /* #color principal*/
+  --color-info-600: #2563eb; /* #2563eb */
+  --color-info-700: #1d4ed8; /* #1d4ed8 */
+  --color-info-800: #1e40af; /* #1e40af */
+  --color-info-900: #1e3a8a; /* #1e3a8a */
+
+  /* Fondos */
+  --color-azuloscuro: #0A3156; /* #0A3156 */
+
+  /*colores para estados de conexión*/
+  --color-naranja-verificacion: #FFC107;
+  --color-azul-factible: #007BFF;
+  --color-verde-activa: #28A745;
+  --color-amarillo-suspendida: #FFC107;
+  --color-rojo-de-baja: #DC3545;
+  --color-morado-para-instalar: #6F42C1;
+  --color-cyan-por-configurar: #17A2B8;
+  --color-rojo-no-factible: #BD2130;
+
+  /* ============================== */
+  /* TEMA OSCURO: PALETA DE COLORES */
+  /* ============================== */
+  
+  /* Principal - Dark Mode */
+  --color-dark-principal: #1a5a94; /* Más claro que el original para mejor contraste */
+  --color-dark-principal-50: #0d1f2d;
+  --color-dark-principal-100: #163047;
+  --color-dark-principal-200: #1f4161;
+  --color-dark-principal-300: #28527b;
+  --color-dark-principal-400: #316395;
+  --color-dark-principal-500: #1a5a94;
+  --color-dark-principal-600: #4d91d2;
+  --color-dark-principal-700: #73a9dc;
+  --color-dark-principal-800: #99c1e6;
+  --color-dark-principal-900: #bfd9f0;
+
+  /* Backgrounds - Dark Mode */
+  --color-dark-bg-primary: #0f172a; /* slate-900 */
+  --color-dark-bg-secondary: #1e293b; /* slate-800 */
+  --color-dark-bg-tertiary: #334155; /* slate-700 */
+  --color-dark-bg-card: #1e293b; /* Para tarjetas */
+  --color-dark-bg-hover: #334155; /* Para estados hover */
+  --color-dark-bg-active: #1e293b80; /* slate-800 con 50% opacidad */
+
+  /* Text - Dark Mode */
+  --color-dark-text-primary: #f1f5f9; /* slate-100 */
+  --color-dark-text-secondary: #cbd5e1; /* slate-300 */
+  --color-dark-text-tertiary: #94a3b8; /* slate-400 */
+  --color-dark-text-muted: #64748b; /* slate-500 */
+
+  /* Borders - Dark Mode */
+  --color-dark-border-primary: #334155; /* slate-700 */
+  --color-dark-border-secondary: #475569; /* slate-600 */
+  --color-dark-border-light: #1e293b; /* slate-800 */
+}
+
+/* ============================== */
+/* Componentes personalizados     */
+/* ============================== */
+@layer components {
+  /* Sección: Dark Mode - Transition helper */
+  .dark-mode-transition {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  /* Sección: Botones — Global (Web) */
+  .boton {
+    @apply px-4 py-2 rounded transition-colors duration-200;
+  }
+
+  .boton-principal { @apply bg-principal-500 text-white hover:bg-principal-600; }
+  .boton-blanco { @apply bg-white text-principal-600 hover:bg-principal-100; }
+  .boton-azul { @apply bg-principal-500 text-white hover:bg-tarjeta-azul-800; }
+  .boton-azul-claro { @apply bg-logo-azul-500 text-white hover:bg-tarjeta-azul-800; }
+  .boton-verde { @apply bg-logo-verde-500 text-white hover:bg-tarjeta-verde-800; }
+  .boton-amarillo { @apply bg-logo-naranja-500 text-white hover:bg-tarjeta-amarillo-800; }
+
+  /* Estados de botones */
+  .boton-exito { @apply bg-exito-500 text-white hover:bg-exito-600; }
+  .boton-error { @apply bg-error-500 text-white hover:bg-error-600; }
+  .boton-advertencia { @apply bg-advertencia-500 text-white hover:bg-advertencia-600; }
+  .boton-info { @apply bg-info-500 text-white hover:bg-info-600; }
+
+  .boton-gris-discreto {
+    @apply bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 text-sm font-medium;
+  }
+
+  /* Sección: Dashboard — Contenedores y Tarjetas */
+  .dashboard-section { 
+    @apply bg-white p-6 md:p-8 rounded-xl border border-gray-200 shadow-sm transition-colors duration-300;
+  }
+  .dark .dashboard-section {
+    background-color: var(--color-dark-bg-card);
+    border-color: var(--color-dark-border-primary);
+  }
+  
+  .dashboard-title { 
+    @apply text-3xl font-bold text-gray-800 mb-2; 
+  }
+  .dark .dashboard-title {
+    color: var(--color-dark-text-primary);
+  }
+  
+  .dashboard-subtitle { 
+    @apply text-gray-600 mb-8; 
+  }
+  .dark .dashboard-subtitle {
+    color: var(--color-dark-text-secondary);
+  }
+  
+  .dashboard-card { 
+    @apply bg-white rounded-2xl p-8 border border-gray-200 shadow-lg transition-colors duration-300; 
+  }
+  .dark .dashboard-card {
+    background-color: var(--color-dark-bg-card);
+    border-color: var(--color-dark-border-primary);
+  }
+
+  /* Sección: Dashboard — Velocímetro */
+  .speedometer { @apply relative w-64 h-32 mb-[-1rem]; }
+  .speedometer-arc {
+    @apply absolute top-0 left-0 w-full h-full rounded-t-full;
+    mask: radial-gradient(circle at 50% 100%, transparent 4rem, black 4.1rem);
+    -webkit-mask: radial-gradient(circle at 50% 100%, transparent 4rem, black 4.1rem);
+    transform-origin: 50% 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    --arc-angle: 0deg;
+    mask-image: conic-gradient(from -90deg at 50% 100%, black 0deg, black var(--arc-angle), transparent var(--arc-angle), transparent 180deg);
+    -webkit-mask-image: conic-gradient(from -90deg at 50% 100%, black 0deg, black var(--arc-angle), transparent var(--arc-angle), transparent 180deg);
+  }
+  .speedometer-needle {
+    @apply absolute bottom-0 left-1/2 w-[2px] h-16 origin-bottom bg-red-500 drop-shadow-md;
+    transform: translateX(-50%) rotate(var(--speed-angle, -90deg));
+    transition: transform 0.5s var(--ease-out);
+  }
+  .speedometer-center {
+    @apply absolute bottom-[-0.5rem] left-1/2 w-4 h-4 rounded-full bg-white border-2 border-red-500;
+    transform: translateX(-50%);
+  }
+
+  /* Sección: Dashboard — Navegación lateral activa */
+  .nav-item-active {
+    @apply font-semibold bg-blue-100 text-blue-600;
+  }
+  .dark .nav-item-active {
+    background-color: var(--color-dark-bg-active) !important;
+    color: var(--color-dark-text-primary) !important;
+    border-left: 4px solid var(--color-dark-principal-600) !important;
+  }
+
+  /* Sección: Dashboard — Items de información */
+  .info-item { 
+    @apply bg-gray-50 p-3 rounded-lg flex flex-col transition-colors duration-300; 
+  }
+  .dark .info-item {
+    background-color: var(--color-dark-bg-tertiary);
+  }
+  
+  .info-item .label { 
+    @apply text-xs text-gray-500 font-medium mb-1; 
+  }
+  .dark .info-item .label {
+    color: var(--color-dark-text-tertiary);
+  }
+  
+  .info-item .value { 
+    @apply text-gray-800 font-semibold; 
+  }
+  .dark .info-item .value {
+    color: var(--color-dark-text-primary);
+  }
+  
+  .contact-info-item .label { 
+    @apply block text-xs text-gray-500; 
+  }
+  .dark .contact-info-item .label {
+    color: var(--color-dark-text-tertiary);
+  }
+  
+  .contact-info-item .value { 
+    @apply block text-sm font-medium text-gray-800; 
+  }
+  .dark .contact-info-item .value {
+    color: var(--color-dark-text-primary);
+  }
+
+/* ============================== */
+/* Sección: Banner — Degradado    */
+/* ============================== */
+
+  .banner-degradado {
+    background: linear-gradient(to right, var(--color-azuloscuro) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+/* ============================== */
+/* Sección: Navegación — Formularios */
+/* ============================== */
+  .nav-item {
+    @apply text-black;
+  }
+
+  .nav-item-done {
+    @apply text-logo-azul-500;
+  }
+
+  .nav-item-actual {
+    @apply bg-principal-500 font-bold text-white;
+  }
+/* Animación suave para el menú móvil */
+#mobile-menu {
+  transition: all 0.3s ease-in-out;
+}
+
+/* ============================== */
+/* Sección: Dashboard — Tarjetas de Planes */
+/* ============================== */
+  .plan-card {
+    @apply border-4 border-transparent; /* Borde base transparente */
+    /* Sección: Helpers / Enlaces */
+    .btn-discreto { @apply text-sm text-blue-600 hover:text-blue-800 underline transition-colors duration-200 cursor-pointer;}
+
+    /* Sección: Landing — CTA */
+    .boton-cta {@apply inline-block px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;}
+
+    /* ============================== */
+    /* Sección: Emails — Bienvenido a ONE (emails/mail.html) */
+    /* Estas clases se usan exclusivamente en la plantilla de email */
+    /* ============================== */
+    .email-body {
+      background-color: #E6F0FA; /* principal-50 */
+      color: #111827; /* gray-900 */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      margin: 0;
+    }
+    .email-boton {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;           /* 8px */
+      padding: 0.75rem 1.5rem; /* 12px 24px */
+      font-weight: 600;
+      border-radius: 0.75rem; /* 12px */
+      text-decoration: none;
+    }
+    .email-boton-azul-claro {
+      background-color: #01A5E3; /* logo-azul-500 */
+      color: #ffffff;
+    }
+    .email-boton-azul-claro:link,
+    .email-boton-azul-claro:visited { color: #ffffff; }
+
+    .email-token-badge {
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background-color: #E6F0FA; /* principal-50 */
+      padding: 0.25rem 0.5rem; /* 4px 8px */
+      border-radius: 0.375rem;  /* 6px */
+      border: 1px solid #BFD9F0; /* principal-200 */
+      color: #0A2E4D;           /* principal-700 */
+    }
+
+    /* Utilidades email para colores de marca (evitar dependencia de Tailwind tokens) */
+    .email-text-principal-600 { color: #0D3E6A; }
+    .email-text-principal-700 { color: #0A2E4D; }
+    .email-text-principal-800 { color: #061F31; }
+    .email-border-principal-100 { border-color: #BFD9F0; }
+    .email-text-logo-azul-500 { color: #01A5E3; }
+  }
+
+  .plan-card[data-color="amarillo"] [data-line-color] { @apply bg-tarjeta-amarillo-500 dark:bg-tarjeta-amarillo-400; }
+  .plan-card[data-color="amarillo"] [data-bg-color] { @apply bg-tarjeta-amarillo-500 dark:bg-tarjeta-amarillo-400; }
+
+  .plan-card[data-color="verde"] [data-line-color] { @apply bg-tarjeta-verde-500 dark:bg-tarjeta-verde-400; }
+  .plan-card[data-color="verde"] [data-bg-color] { @apply bg-tarjeta-verde-500 dark:bg-tarjeta-verde-400; }
+
+  .plan-card[data-color="azul"] [data-line-color] { @apply bg-tarjeta-azul-500 dark:bg-tarjeta-azul-400; }
+  .plan-card[data-color="azul"] [data-bg-color] { @apply bg-tarjeta-azul-500 dark:bg-tarjeta-azul-400; }
+
+
+  .btn-discreto { @apply text-sm text-blue-600 hover:text-blue-800 underline transition-colors duration-200 cursor-pointer;}
+
+  .boton-cta {@apply inline-block px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;}
+  body {
+    font-family: 'Inter', sans-serif;}
+  /* ============================== */
+  /* Sección: Animaciones / Helpers Visuales */
+  /* ============================== */
+  .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;}
+
+  .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);}
+
+  .hover-scale {
+      transition: transform 0.3s ease;}
+
+  .hover-scale:hover {
+      transform: scale(1.02);}
+
+/*
+  Title: Home | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\index.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Utilizado en el botón de autogestión y en el texto del pie de página.
+  - text-lg: Usado en la sección de autogestión, descripciones de la sección de información y títulos del pie de página.
+  - text-4xl, sm:text-5xl, md:text-5xl, lg:text-6xl: Tamaños responsivos para los títulos principales del banner ("Conectamos tu mundo.").
+*/
+
+/*
+  Title: Login | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\auth\login.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Aplicado a etiquetas de formulario, mensajes de error y enlaces de registro.
+  - text-base: Tamaño base para la descripción debajo del título principal.
+  - text-lg: Usado en la descripción y en los títulos del pie de página.
+  - text-3xl, md:text-4xl: Tamaños responsivos para el título principal "Accede a tu cuenta".
+*/
+
+/*
+  Title: Registro | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\auth\registro.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-base, md:text-lg: Usado en el párrafo de descripción debajo del título.
+  - text-lg: Utilizado en los títulos del pie de página.
+  - text-3xl, md:text-4xl, lg:text-5xl: Tamaños responsivos para el título principal "Bienvenido al Portal de Clientes".
+*/
+
+/*
+  Title: Registro | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\auth\form.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para textos pequeños como el pie de página y ayudas en formularios.
+  - text-sm: Usado en el texto del pie de página.
+  - text-base: Para la descripción principal de la página.
+  - text-lg: Usado en la descripción y en los títulos del pie de página.
+  - text-xl: Para el título de la sección de progreso "Progreso".
+  - text-3xl, md:text-4xl: Tamaños responsivos para el título principal "Crea tu cuenta".
+*/
+
+/*
+  Title: About Us | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\contact\acercade.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs, text-sm: Usados en el pie de página.
+  - text-lg: Para el cuerpo del texto principal (párrafos) y títulos del footer.
+  - text-xl, sm:text-2xl, md:text-3xl: Tamaños responsivos para el subtítulo del banner.
+  - text-4xl, md:text-5xl, lg:text-6xl: Tamaños responsivos para el título del banner y el título "Acerca de Nosotros".
+*/
+
+/*
+  Title: Contacto | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\contact\contacto.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs, text-sm: Usados en el pie de página.
+  - text-base: Para el texto de los botones y la descripción del horario.
+  - text-lg: Para los títulos de las tarjetas de contacto y los títulos del footer.
+  - text-3xl, md:text-4xl: Tamaños responsivos para el título principal "Ponete en Contacto con Nosotros".
+*/
+
+/*
+  Title: Dashboard | ONE Internet
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\dashboard.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para el texto del pie de página.
+  - text-sm: Para los enlaces del submenú de configuración y texto del footer.
+  - text-lg: Para los títulos del pie de página.
+  - text-2xl: Para el título "Dashboard" en la barra lateral.
+*/
+
+/*
+  Title: Notificaciones | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\notificaciones.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-3xl: Para el título principal "Comunicados".
+*/
+
+/*
+  Title: Home | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\home.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Para el texto de los botones del dropdown.
+  - text-lg: Para el subtítulo de bienvenida "Hola, [Nombre de Usuario]...".
+  - text-3xl: Para el título principal "¡Bienvenido a tu Dashboard!".
+*/
+
+/*
+  Title: Mi Perfil | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\usuario.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Para etiquetas de formulario, botones de acción y fecha de membresía.
+  - text-xl, sm:text-2xl: Tamaños responsivos para los títulos de sección ("Información Personal", etc.).
+  - text-2xl, sm:text-3xl: Tamaños responsivos para el nombre del usuario.
+*/
+
+/*
+  Title: Mis Conexiones | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\conexiones.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para las etiquetas de estado de conexión ("Activo", "Suspendido").
+  - text-sm: Para el texto de la tabla y los botones de acción.
+  - text-xl: Para el título del modal "Solicitar Nueva Conexión".
+  - text-2xl: Para el título principal "Mis Conexiones".
+*/
+
+/*
+  Title: Mis Facturas | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\facturas.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para las etiquetas de estado de factura ("Pagado", "Vencido") y texto del footer.
+  - text-sm: Para el texto de la tabla y del pie de página.
+  - text-lg: Para los títulos del pie de página.
+  - text-2xl: Para el título principal "Mis Facturas" y el título del Dashboard en la barra lateral.
+*/
+
+/*
+  Title: Promociones | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\promociones.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Para el texto informativo "Actualmente no hay ofertas...".
+  - text-lg: Para el título de la tarjeta "Sin promociones por ahora".
+  - dashboard-title (text-3xl): Para el título principal "Promociones y Beneficios".
+*/
+
+/*
+  Title: Soporte | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\soporte.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-sm: Para etiquetas de formulario y descripciones en la sección de contacto.
+  - text-lg: Para el subtítulo de la página.
+  - text-xl: Para el título de la columna de información "Otras formas de contacto".
+  - text-3xl: Para el título principal "Contactar a Soporte".
+*/
+
+/*
+  Title: Cambiar Contraseña | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\cambiar-contrasena.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para el texto de ayuda sobre los requisitos de la contraseña.
+  - text-sm: Para las etiquetas de los campos del formulario.
+  - text-lg: Para el párrafo de descripción debajo del título.
+  - text-3xl: Para el título principal "Cambiar Contraseña".
+*/
+
+/*
+  Title: Planes | Dashboard
+  File: d:\Bibliotecas\Desktop\contratos\src\views\pages\dashboard\planes.html
+
+  Font and Size Information:
+  - font-sans: Fuente principal para todo el cuerpo del documento.
+  - text-xs: Para las etiquetas del velocímetro (0, 500, 1000) y las etiquetas de detalles del plan.
+  - text-lg: Para el título de la sección "Detalles del Plan".
+  - text-xl: Para el nombre del plan y la unidad "Mbps".
+  - text-5xl: Para el valor numérico de la velocidad en el velocímetro.
+  - dashboard-title (text-3xl): Para el título principal "Velocidad de mi Plan".
+*/
+
+/* ============================== */
+/* Sección: Leaflet Map - Override inline styles for CSP compliance */
+/* ============================== */
+
+/* Map container */
+#map {
+  height: 360px !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* Leaflet container base styles */
+.leaflet-container {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Leaflet panes - fix positioning */
+.leaflet-pane {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 200 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 400 !important;
+}
+
+.leaflet-shadow-pane {
+  z-index: 500 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 650 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 700 !important;
+}
+
+/* Leaflet tiles */
+.leaflet-tile-container {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.leaflet-tile {
+  position: absolute !important;
+  width: 256px !important;
+  height: 256px !important;
+}
+
+/* Leaflet markers */
+.leaflet-marker-icon {
+  position: absolute !important;
+  display: block !important;
+}
+
+.leaflet-marker-shadow {
+  position: absolute !important;
+  display: block !important;
+}
+
+/* Leaflet popups */
+.leaflet-popup {
+  position: absolute !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 1px !important;
+  text-align: left !important;
+  border-radius: 12px !important;
+}
+
+.leaflet-popup-content {
+  margin: 13px 19px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip-container {
+  position: absolute !important;
+  left: 50% !important;
+  margin-left: -10px !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.leaflet-popup-tip {
+  width: 17px !important;
+  height: 17px !important;
+  padding: 1px !important;
+  margin: -10px auto 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Leaflet controls */
+.leaflet-control {
+  position: relative !important;
+  z-index: 800 !important;
+  pointer-events: auto !important;
+  float: left !important;
+  clear: both !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  position: absolute !important;
+  z-index: 1000 !important;
+  pointer-events: none !important;
+}
+
+.leaflet-top {
+  top: 0 !important;
+}
+
+.leaflet-right {
+  right: 0 !important;
+}
+
+.leaflet-bottom {
+  bottom: 0 !important;
+}
+
+.leaflet-left {
+  left: 0 !important;
+}
+
+.leaflet-control-zoom {
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4) !important;
+}
+
+/* Attribution control */
+.leaflet-control-attribution {
+  background: #fff !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  margin: 0 !important;
+}
+
+/* Ensure interactive elements work */
+.leaflet-interactive {
+  cursor: pointer !important;
+}
+
+.leaflet-grab {
+  cursor: grab !important;
+}
+
+.leaflet-grabbing {
+  cursor: grabbing !important;
+}
+}
+
+/* WiFi Icon States */
+.wifi-icon {
+  transition: color 0.3s ease;
+}
+
+.wifi-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estados de conexión - Clases para iconos */
+.state-en-verificacion .wifi-icon { color: var(--color-naranja-verificacion); }
+.state-factible .wifi-icon { color: var(--color-azul-factible); }
+.state-activa .wifi-icon { color: var(--color-verde-activa); }
+.state-suspendida .wifi-icon { color: var(--color-amarillo-suspendida); }
+.state-de-baja .wifi-icon { color: var(--color-rojo-de-baja); }
+.state-para-instalar .wifi-icon { color: var(--color-morado-para-instalar); }
+.state-por-configurar .wifi-icon { color: var(--color-cyan-por-configurar); }
+.state-no-factible .wifi-icon { color: var(--color-rojo-no-factible); }
+.state-inactivo .wifi-icon { color: #6B7280; /* gray-500 */ }
+
+/* Pestañas de solicitudes */
+.tab-solicitud {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tab-solicitud:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 79, 135, 0.1);
+}
+
+/* ============================== */
+/* Sección: Dropdowns de búsqueda (sugerencias) */
+/* ============================== */
+
+/* Scrollbar personalizado para dropdowns de sugerencias */
+[id^="sugerencias-"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+[id^="sugerencias-"]::-webkit-scrollbar-track {
+  background: #f1f5f9; /* slate-100 */
+  border-radius: 10px;
+}
+
+.dark [id^="sugerencias-"]::-webkit-scrollbar-track {
+  background: var(--color-dark-bg-tertiary);
+}
+
+[id^="sugerencias-"]::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+[id^="sugerencias-"]::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slate-400 */
+}
+
+.dark [id^="sugerencias-"]::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border-secondary);
+}
+
+.dark [id^="sugerencias-"]::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-text-tertiary);
+}
+
+/* Firefox scrollbar */
+[id^="sugerencias-"] {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.dark [id^="sugerencias-"] {
+  scrollbar-color: var(--color-dark-border-secondary) var(--color-dark-bg-tertiary);
+}
+
+/* ============================== */
+/* Sección: Buscador de Usuario */
+/* ============================== */
+
+/* Estilos base para el buscador */
+.buscador-usuario-wrapper {
+  --transition-speed: 300ms;
+  position: relative;
+  width: 100%;
+}
+
+.buscador-usuario-main {
+  position: relative;
+  width: 100%;
+}
+
+.buscador-input-container {
+  transition: all var(--transition-speed) ease;
+  width: 100%;
+}
+
+.buscador-input {
+  font-weight: 500;
+}
+
+.buscador-input::placeholder {
+  font-weight: 400;
+}
+
+/* Search chips */
+.search-chip {
+  @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer;
+}
+
+.search-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.search-chip:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar personalizado para el buscador */
+.buscador-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.buscador-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.dark .buscador-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-dark-bg-tertiary);
+}
+
+.buscador-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.buscador-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark .buscador-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border-secondary);
+}
+
+.dark .buscador-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-text-tertiary);
+}
+
+/* Firefox scrollbar */
+.buscador-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.dark .buscador-scrollbar {
+  scrollbar-color: var(--color-dark-border-secondary) var(--color-dark-bg-tertiary);
+}
+
+/* Result items */
+.buscador-result-item {
+  position: relative;
+}
+
+.buscador-result-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: all 200ms ease;
+}
+
+.buscador-result-item:hover::before {
+  background: currentColor;
+}
+
+/* Animaciones */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 400ms ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 300ms ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 400ms ease-out;
+}
+
+/* ============================== */
+/* Sección: PDF Viewer - Estilos para iframe y contenedores */
+/* ============================== */
+
+/* Iframe del visor de PDF */
+.pdf-viewer-iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+  min-height: 100% !important;
+}
+
+/* Contenedor del visor de PDF */
+.pdf-viewer-container {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+}
+
+/* Canvas del visor PDF.js - Responsivo */
+#pdf-canvas {
+  @apply w-full h-auto shadow-lg bg-white;
+  display: block !important;
+  max-width: 100%;
+}
+
+.dark #pdf-canvas {
+  @apply bg-dark-bg-secondary;
+}
+
+/* Canvas de firma - Estados interactivos */
+.signature-canvas-drawing {
+  @apply border-blue-500 bg-blue-50;
+}
+
+.dark .signature-canvas-drawing {
+  @apply bg-blue-900/20;
+}
+
+.signature-canvas-idle {
+  @apply border-gray-400;
+}
+
+.dark .signature-canvas-idle {
+  @apply border-gray-600;
+}
+
+/* ============================== */
+/* Sección: Verify Email - Animaciones */
+/* ============================== */
+
+@keyframes checkmark {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.checkmark {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: checkmark 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================== */
+/* Sección: Session Manager - Animaciones */
+/* ============================== */
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.animate-modal-slide-in {
+  animation: modalSlideIn 0.3s ease-out forwards;
+}

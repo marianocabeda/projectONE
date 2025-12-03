@@ -1,0 +1,145 @@
+<!-- Módulo: Modificación de Datos del Cliente -->
+<!--
+    Partial: this fragment is embedded inside the dashboard shell.
+    
+    Do NOT add <head> or <link> tags here — keep this file as a partial.
+-->
+<div class="min-h-screen bg-principal-50 dark:bg-dark-bg-primary p-2 sm:p-4 md:p-8 transition-colors duration-300">
+    <div class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <button id="btn-volver" class="flex items-center text-gray-600 dark:text-dark-text-secondary hover:text-gray-800 dark:hover:text-dark-text-primary transition-colors px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-tertiary">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="text-sm sm:text-base">Volver</span>
+                </button>
+                <div class="text-left sm:text-right">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-dark-text-primary">Modificar Datos del Cliente</h1>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-dark-text-secondary">Actualizar información personal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Búsqueda de Cliente -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300" id="seccion-busqueda">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-dark-text-primary mb-4 sm:mb-6">Buscar Cliente</h2>
+            <p class="text-gray-600 dark:text-dark-text-secondary mb-6">Busca el cliente por documento o email para modificar sus datos.</p>
+            
+            <!-- Componente Buscador Reutilizable -->
+            <div id="buscador-modificar-datos-container"></div>
+        </div>
+
+        <!-- Formulario de Edición -->
+        <div id="seccion-edicion" class="hidden">
+            <div class="dashboard-card">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="dashboard-subtitle">Datos del Cliente</h2>
+                    <button id="btn-nueva-busqueda" class="boton boton-blanco px-4 py-2 border border-gray-300 text-sm">
+                        Nueva Búsqueda
+                    </button>
+                </div>
+
+                <form id="form-edicion" class="space-y-4 sm:space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                        <!-- Nombre -->
+                        <div>
+                            <label for="edit-nombre" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                                Nombre *
+                            </label>
+                            <input type="text" id="edit-nombre" required 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Apellido -->
+                        <div>
+                            <label for="edit-apellido" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                                Apellido
+                            </label>
+                            <input type="text" id="edit-apellido" 
+                                   class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="edit-email" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                                Email *
+                            </label>
+                            <input type="email" id="edit-email" required 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div>
+                            <label for="edit-telefono" class="block text-sm font-medium text-gray-700 mb-2">
+                                Teléfono
+                            </label>
+                            <input type="tel" id="edit-telefono" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Tipo de Documento -->
+                        <div>
+                            <label for="edit-tipo-doc" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tipo de Documento *
+                            </label>
+                            <select id="edit-tipo-doc" required 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                                <option value="DNI">DNI</option>
+                                <option value="RUC">RUC</option>
+                                <option value="PASAPORTE">Pasaporte</option>
+                            </select>
+                        </div>
+
+                        <!-- Número de Documento -->
+                        <div>
+                            <label for="edit-documento" class="block text-sm font-medium text-gray-700 mb-2">
+                                Número de Documento *
+                            </label>
+                            <input type="text" id="edit-documento" required 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="md:col-span-2">
+                            <label for="edit-direccion" class="block text-sm font-medium text-gray-700 mb-2">
+                                Dirección
+                            </label>
+                            <input type="text" id="edit-direccion" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div class="bg-advertencia-50 border border-advertencia-200 rounded-lg p-4">
+                        <p class="text-sm text-advertencia-800">
+                            ℹ️ Los cambios se guardarán inmediatamente y el cliente será notificado por email.
+                        </p>
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="btn-cancelar" class="boton-secundario">
+                            Cancelar
+                        </button>
+                        <button type="submit" id="btn-guardar" class="boton-principal">
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 flex flex-col items-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-principal-600 mb-4"></div>
+        <p class="text-gray-700" id="loading-text">Procesando...</p>
+    </div>
+</div>
+
+<!-- Script del Módulo -->
+<script src="/js/dashboard/atencion/atencion-modificar-datos.js"></script>

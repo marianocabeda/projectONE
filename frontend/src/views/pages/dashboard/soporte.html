@@ -1,0 +1,48 @@
+    <div id="page-content" class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 md:gap-8 lg:gap-12">
+                
+                <!-- Columna del Formulario (ocupa 2/3 del espacio) -->
+                <div class="md:col-span-2 md:bg-white md:dark:bg-dark-bg-card md:rounded-2xl md:shadow-lg p-4 md:p-8 transition-all duration-300">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-dark-text-primary mb-2">Contactar a Soporte</h1>
+                    <p class="text-gray-600 dark:text-dark-text-secondary text-lg mb-6">¿Tenés alguna consulta? Escribila a continuación y envíala por tu canal preferido.</p>
+                    
+                    <form id="support-ticket-form" class="space-y-6">
+                        <div>
+                            <label for="support-query" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">Tu consulta</label>
+                            <textarea id="support-query" name="query" rows="8" class="w-full p-3 border border-gray-300 dark:border-dark-border-primary rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 bg-white dark:bg-dark-bg-tertiary dark:text-dark-text-primary" placeholder="Escribe aquí tu mensaje para el equipo de soporte..." required></textarea>
+                        </div>
+        
+                        <div class="flex flex-col sm:flex-row justify-end gap-4 pt-4">
+                            <button type="button" id="send-email" class="flex items-center justify-center gap-2 px-6 py-3 bg-tarjeta-azul-500 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md">
+                                <span>Enviar por Email</span>
+                            </button>
+                            <button type="button" id="send-whatsapp" class="flex items-center justify-center gap-2 px-6 py-3 bg-tarjeta-verde-500 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 shadow-md">
+                                <span>Enviar por WhatsApp</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Columna de Información Adicional -->
+                <div class="mt-8 md:mt-0 md:col-span-1 md:bg-white md:dark:bg-dark-bg-card md:rounded-2xl md:shadow-lg p-4 md:p-8 md:border md:border-gray-200 md:dark:border-dark-border-primary transition-all duration-300">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-dark-text-primary mb-6">Otras formas de contacto</h3>
+                    <div class="space-y-6">
+                        <div class="contact-info-item flex flex-col">
+                            <span class="text-sm font-medium text-gray-600 dark:text-dark-text-secondary">Horario de atención</span>
+                            <span class="text-gray-900 dark:text-dark-text-primary font-semibold">Lunes a Viernes de 8:00 a 18:00 hs.</span>
+                        </div>
+                        <div class="contact-info-item flex flex-col">
+                            <span class="text-sm font-medium text-gray-600 dark:text-dark-text-secondary">Teléfono</span>
+                            <a href="tel:+5492634217506" class="text-blue-600 dark:text-dark-principal-600 font-semibold hover:underline transition duration-200">+54 9 263 421-7506</a>
+                        </div>
+                        <div class="contact-info-item flex flex-col">
+                            <span class="text-sm font-medium text-gray-600 dark:text-dark-text-secondary">Email de Soporte</span>
+                            <a href="mailto:info@oneinternet.com.ar" class="text-blue-600 dark:text-dark-principal-600 font-semibold hover:underline transition duration-200">info@oneinternet.com.ar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="/js/utils/soporte.js"></script>
+    </div>

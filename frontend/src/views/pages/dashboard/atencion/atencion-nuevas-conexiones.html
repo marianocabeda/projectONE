@@ -1,0 +1,241 @@
+<!-- Módulo: Nuevas Conexiones y Usuarios -->
+<!--
+    Partial: this fragment is embedded inside the dashboard shell.
+    
+    Do NOT add <head> or <link> tags here — keep this file as a partial.
+-->
+<div class="min-h-screen bg-principal-50 dark:bg-dark-bg-primary p-2 sm:p-4 md:p-8 transition-colors duration-300">
+    <div class="w-full max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        
+        <!-- Header con Navegación -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary mb-4 sm:mb-6 transition-colors duration-300">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-3">
+                <button id="btn-volver" class="flex items-center text-gray-600 dark:text-dark-text-secondary hover:text-gray-800 dark:hover:text-dark-text-primary transition-colors px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-tertiary">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="text-sm sm:text-base">Volver</span>
+                </button>
+                <div class="text-left sm:text-right">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-dark-text-primary">Nuevas Conexiones</h1>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-dark-text-secondary">Registrar clientes y contratar servicios</p>
+                </div>
+            </div>
+
+            <!-- Barra de Progreso -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 gap-1 sm:gap-2">
+                <span class="text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-primary">Paso <span id="current-step">1</span> de 4</span>
+                <span class="text-xs sm:text-sm text-gray-600 dark:text-dark-text-secondary" id="step-description">Búsqueda de Cliente</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-dark-bg-tertiary rounded-full h-2">
+                <div id="progress-bar" class="bg-principal-500 dark:bg-dark-principal-600 h-2 rounded-full transition-all duration-300" style="width: 25%"></div>
+            </div>
+        </div>
+
+        <!-- Contenedor Principal -->
+        <div class="dashboard-card dark:bg-dark-bg-card dark:border-dark-border-primary transition-colors duration-300">
+
+            <!-- PASO 1: Búsqueda de Cliente -->
+            <div id="step-1" class="step-content">
+                <h2 class="dashboard-subtitle dark:text-dark-text-primary mb-4">Paso 1: Verificar Cliente Existente</h2>
+                <p class="text-gray-600 dark:text-dark-text-secondary mb-6">Busca si el cliente ya está registrado en el sistema antes de crear una nueva cuenta.</p>
+
+                <!-- Componente Buscador Reutilizable -->
+                <div id="buscador-nuevas-conexiones-container"></div>
+
+                <div class="max-w-2xl mx-auto hidden" id="seccion-busqueda-legacy">
+                    <!-- Búsqueda por DNI/RUC -->
+                    <div class="mb-4 sm:mb-6">
+                        <label for="buscar-documento" class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                            Buscar por DNI
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="buscar-documento" 
+                                   class="w-full px-3 sm:px-4 py-2 pr-12 sm:pr-24 text-sm sm:text-base border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent"
+                                   placeholder="Número de documento">
+                            <button id="btn-buscar-documento" class="absolute right-1 top-1 bottom-1 boton boton-exito whitespace-nowrap px-2 sm:px-3 py-1 text-sm">
+                                <svg class="w-4 h-4 inline-block sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <span class="hidden sm:inline">Buscar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <span class="text-gray-500 dark:text-dark-text-tertiary text-sm">o</span>
+                    </div>
+
+                    <!-- Búsqueda por Email -->
+                    <div class="mb-6">
+                        <label for="buscar-email" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">
+                            Buscar por Email
+                        </label>
+                        <div class="relative">
+                            <input type="email" id="buscar-email" 
+                                   class="w-full px-4 py-2 pr-12 sm:pr-24 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-transparent"
+                                   placeholder="correo@ejemplo.com">
+                            <button id="btn-buscar-email" class="absolute right-1 top-1 bottom-1 boton boton-exito px-2 sm:px-3 py-1 text-sm">
+                                <svg class="w-4 h-4 inline-block sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <span class="hidden sm:inline">Buscar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resultado de Búsqueda -->
+                    <div id="resultado-busqueda" class="hidden">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+
+                    <!-- Botón para Crear Nuevo Cliente -->
+                    <div class="text-center mt-6 sm:mt-8">
+                        <button id="btn-crear-nuevo" class="boton bg-princ px-6 sm:px-8 py-3 w-full sm:w-auto">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                            </svg>
+                            <span class="text-sm sm:text-base">Cliente Nuevo - Crear Cuenta</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón Crear Nuevo Cliente (para usar con buscador) -->
+                <div class="text-center mt-6 sm:mt-8">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-dark-border-primary"></div>
+                        <span class="text-sm text-gray-500 dark:text-dark-text-tertiary">o</span>
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-dark-border-primary"></div>
+                    </div>
+                    <button id="btn-crear-nuevo-alt" class="boton boton-exito bg-principal-500 px-6 sm:px-8 py-3 w-full sm:w-auto shadow-lg hover:shadow-xl transition-shadow">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        </svg>
+                        <span class="text-sm sm:text-base font-semibold">Cliente Nuevo - Crear Cuenta</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PASO 2: Registro de Cliente (Flujo de Registro) -->
+            <div id="step-2" class="step-content hidden">
+                <h2 class="dashboard-subtitle dark:text-dark-text-primary mb-4">Paso 2: Registrar Nuevo Cliente</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div id="registro-container">
+                        <!-- Se cargará el componente de registro aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3: Datos de Conexión (Flujo de Contratación) -->
+            <div id="step-3" class="step-content hidden">
+                <h2 class="dashboard-subtitle dark:text-dark-text-primary mb-4">Paso 3: Configurar Conexión</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div id="contratacion-container">
+                        <!-- Se cargará el componente de contratación aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 4: Verificación de Factibilidad -->
+            <div id="step-4" class="step-content hidden">
+                <h2 class="dashboard-subtitle dark:text-dark-text-primary mb-4">Paso 4: Verificación Técnica</h2>
+                <p class="text-gray-600 dark:text-dark-text-secondary mb-6">Verifica la factibilidad de instalación y asigna parámetros técnicos.</p>
+
+                <!-- Visualización de Dirección y Mapa -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                    <div class="bg-gray-50 dark:bg-dark-bg-tertiary rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Dirección de Instalación</h3>
+                        <div id="direccion-instalacion" class="text-sm text-gray-700 dark:text-dark-text-secondary">
+                            <!-- Se llenará con los datos de dirección -->
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-dark-bg-tertiary rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Plan Seleccionado</h3>
+                        <div id="plan-seleccionado" class="text-sm text-gray-700 dark:text-dark-text-secondary">
+                            <!-- Se llenará con los datos del plan -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa de Ubicación -->
+                <div class="mb-6">
+                    <h3 class="font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Ubicación en el Mapa</h3>
+                    <div id="mapa-container" class="w-full h-96 bg-gray-200 dark:bg-dark-bg-tertiary rounded-lg flex items-center justify-center">
+                        <span class="text-gray-500 dark:text-dark-text-tertiary">Mapa de ubicación</span>
+                    </div>
+                </div>
+
+                <!-- Verificación de Factibilidad -->
+                <div class="mb-6">
+                    <h3 class="font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Verificación de Factibilidad</h3>
+                    <div class="flex space-x-4">
+                        <button id="btn-factible" class="boton-exito flex-1 px-6 py-3">
+                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Es Factible
+                        </button>
+                        <button id="btn-no-factible" class="boton-error flex-1 px-6 py-3">
+                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            No es Factible
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Parámetros Técnicos (Solo si es factible) -->
+                <div id="parametros-tecnicos" class="hidden">
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Parámetros Técnicos de Instalación</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div>
+                            <label for="puerto" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">Puerto</label>
+                            <input type="text" id="puerto" class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-logo-verde-500 focus:border-transparent" placeholder="Ej: 1">
+                        </div>
+                        <div>
+                            <label for="nap" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">NAP</label>
+                            <input type="text" id="nap" class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-logo-verde-500 focus:border-transparent" placeholder="Ej: NAP-01">
+                        </div>
+                        <div>
+                            <label for="vlan" class="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-2">VLAN</label>
+                            <input type="text" id="vlan" class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-logo-verde-500 focus:border-transparent" placeholder="Ej: 100">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button id="btn-finalizar" class="boton-exito px-8 py-3">
+                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Emitir Contrato y Cerrar Venta
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Motivo de No Factibilidad -->
+                <div id="motivo-no-factible" class="hidden">
+                    <h3 class="font-semibold text-gray-800 dark:text-dark-text-primary mb-3">Motivo de No Factibilidad</h3>
+                    <textarea id="motivo-textarea" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:bg-dark-bg-tertiary dark:border-dark-border-primary dark:text-dark-text-primary rounded-lg focus:ring-2 focus:ring-error-500 focus:border-transparent mb-4" placeholder="Describe el motivo por el cual no es factible la instalación..."></textarea>
+                    
+                    <div class="flex justify-end">
+                        <button id="btn-denegar-servicio" class="boton-error px-8 py-3">
+                            Denegar Servicio y Notificar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-dark-bg-card rounded-xl p-6 flex flex-col items-center border dark:border-dark-border-primary">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-logo-verde-500 dark:border-green-500 mb-4"></div>
+        <p class="text-gray-700 dark:text-dark-text-primary" id="loading-text">Procesando...</p>
+    </div>
+</div>
+
+<!-- Script del Módulo -->
+<script type="module" src="/js/dashboard/atencion/atencion-nuevas-conexiones.js?v=20251123-2"></script>

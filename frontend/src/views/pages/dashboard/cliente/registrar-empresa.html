@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Empresa | ONE Internet</title>
+    <link href="/public/output.css" rel="stylesheet" />
+</head>
+<body class="font-sans bg-gray-50 dark:bg-dark-bg-primary text-gray-900 dark:text-dark-text-primary transition-colors duration-300">
+
+    <!-- Header dinámico -->
+    <div id="header"></div>
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Barra lateral de navegación de pasos -->
+        <aside id="registro-nav" class="hidden md:block w-64 bg-white dark:bg-dark-bg-secondary p-6 border-r border-gray-200 dark:border-dark-border-primary flex-shrink-0 transition-colors duration-300">
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-principal-600 dark:text-dark-principal-600 mb-2">
+                    <i class="fas fa-building mr-2"></i>Registro de Empresa
+                </h2>
+                <p class="text-sm text-gray-600 dark:text-dark-text-secondary">Completa los pasos para registrar tu empresa</p>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="mb-6">
+                <div class="bg-gray-200 dark:bg-dark-bg-tertiary rounded-full h-2 overflow-hidden transition-colors">
+                    <div id="progress-bar" class="bg-principal-500 h-full transition-all duration-300" style="width: 33.33%"></div>
+                </div>
+            </div>
+
+            <!-- Navegación de pasos -->
+            <nav>
+                <ul id="step-navigation-list" class="space-y-2">
+                    <!-- Los pasos se cargarán dinámicamente -->
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button 
+            id="hamburger-button" 
+            class="md:hidden fixed top-4 left-4 z-50 bg-principal-500 text-white p-3 rounded-lg shadow-lg hover:bg-principal-600 transition"
+            aria-label="Menú de navegación"
+        >
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+
+        <!-- Contenido principal -->
+        <main class="flex-grow p-4 md:p-8 pt-20 md:pt-8">
+            <div class="max-w-3xl mx-auto">
+                <!-- Header de la página -->
+                <div class="mb-8 text-center md:text-left">
+                    <h1 id="page-title" class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-dark-text-primary mb-2">
+                        Registrar Empresa
+                    </h1>
+                    <p id="page-desc" class="text-gray-600 dark:text-dark-text-secondary text-lg">
+                        Registra tu empresa para poder gestionar conexiones y servicios empresariales
+                    </p>
+                </div>
+
+                <!-- Contenedor del formulario multi-paso -->
+                <div id="registro-content" class="bg-white dark:bg-dark-bg-card rounded-xl border border-gray-200 dark:border-dark-border-primary shadow-sm p-6 md:p-8 transition-colors duration-300">
+                    <!-- El contenido de cada paso se cargará aquí dinámicamente -->
+                    <div class="text-center py-12">
+                        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-principal-500"></div>
+                        <p class="text-gray-600 dark:text-dark-text-secondary mt-4">Cargando formulario...</p>
+                    </div>
+                </div>
+
+                <!-- Información adicional -->
+                <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 transition-colors">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-500 text-xl mr-3 mt-1"></i>
+                        <div class="text-sm text-blue-800 dark:text-blue-300">
+                            <p class="font-semibold mb-1">Importante:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Asegurate de tener a mano el CUIT de la empresa</li>
+                                <li>Los datos ingresados deben coincidir con los registros oficiales</li>
+                                <li>Podés pausar el registro y continuar más tarde desde el mismo paso</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    >
+    
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-dark-bg-secondary border-t border-gray-100 dark:border-dark-border-primary mt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-sm text-gray-500 dark:text-dark-text-tertiary">
+                <p>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+                <script src="/js/env.js"></script>
+                <script src="/js/utils/logger.js"></script>
+                <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+                <script src="/js/config.js"></script>
+                <script src="/js/utils/manejador-errores.js"></script>
+                <script src="/js/utils/sanitizer.js"></script>
+                <script src="/js/utils/validators.js"></script>
+                <script src="/js/utils/http.js"></script>
+                <script src="/js/dashboard/cliente/empresas.js"></script>
+                <script src="/js/ui/modal-error.js"></script>
+                <script src="/js/auth/token.js"></script>
+                <script src="/js/auth/auth-guard.js"></script>
+                <script src="/js/auth/session-manager.js"></script>
+                <script src="/js/auth/logout.js"></script>
+                <script type="module" src="/js/dashboard/encabezado-dashboard.js"></script>
+                <script type="module" src="/js/company/gestor-formulario-empresa.js"></script>
+
+</body>
+</html>

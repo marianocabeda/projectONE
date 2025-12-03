@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>Verificá tu cuenta - ONE Internet</title>
+<style>
+/* Estilos base */
+body { 
+  margin:0; 
+  padding:0; 
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color:#f9fafb;
+  color:#111827;
+}
+
+/* Forzar variante clara por defecto con máxima especificidad */
+img.logo-light { display: block !important; margin: 0 auto !important; }
+img.logo-dark  { display: none  !important; }
+
+/* Dark mode para clientes que lo soportan */
+@media (prefers-color-scheme: dark) {
+  body { 
+    background-color:#111827 !important; 
+    color:#f9fafb !important; 
+  }
+  .card { 
+    background-color:#1f2937 !important; 
+    color:#f9fafb !important; 
+  }
+  .text-dark { 
+    color:#f9fafb !important; 
+  }
+  .text-code { 
+    color:#f9fafb !important; 
+  }
+  .btn-cell { 
+    background-color:#2563eb !important; 
+  }
+  .btn-link { 
+    color:#ffffff !important; 
+  }
+  .warning { 
+    background-color:#78350f !important; 
+    border-left-color:#fbbf24 !important; 
+    color:#fef3c7 !important; 
+  }
+  .logo-light { 
+    display:none !important; 
+  }
+  .logo-dark { 
+    display:block !important; 
+    margin: 0 auto !important;
+  }
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+  .card {
+    padding: 20px !important;
+  }
+}
+</style>
+</head>
+<body style="margin:0; padding:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color:#f9fafb; color:#111827;">
+
+<!-- Preheader -->
+<div style="display:none; max-height:0; overflow:hidden; font-size:1px; line-height:1px; color:#6b7280; mso-hide:all;">
+  ¡Bienvenido a ONE Internet! Confirmá tu correo para activar tu cuenta.
+</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f9fafb">
+<tr>
+  <td align="center" style="padding:40px 10px;">
+
+    <!-- Contenedor email -->
+    <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%;">
+      <tr>
+        <td class="card" bgcolor="#ffffff" style="padding:30px; border-radius:8px; text-align:center;">
+
+          <!-- Logos -->
+          <img src="cid:logo-light" class="logo-light" width="400" alt="ONE Internet" style="display:block !important; margin:0 auto; max-width:100%; height:auto;">
+          <img src="cid:logo-dark" class="logo-dark" width="400" alt="ONE Internet" style="display:none !important; margin:0 auto; max-width:100%; height:auto;">
+
+          <!-- Icono verificación -->
+          <div style="width:64px; height:64px; background-color:#2563eb; color:#ffffff; font-size:32px; font-weight:bold; line-height:64px; text-align:center; margin:20px auto; border-radius:50%;">✓</div>
+
+          <!-- Título -->
+          <h1 class="text-dark" style="font-size:22px; margin:15px 0;">¡Verificá tu cuenta!</h1>
+
+          <!-- Saludo -->
+          <p class="text-dark" style="font-size:15px; color:#6b7280; margin:10px 0;">
+            Hola <strong style="color:#111827;">{{.UserName}}</strong>,
+          </p>
+
+          <!-- Texto descriptivo -->
+          <p class="text-dark" style="font-size:14px; color:#6b7280; margin:10px 0 20px 0;">
+            Gracias por registrarte en <strong style="color:#111827;">ONE Internet</strong>. Para completar tu registro y activar tu cuenta, necesitamos que verifiques tu correo electrónico.
+          </p>
+
+          <!-- Botón -->
+          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;">
+            <tr>
+              <td align="center">
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="center" bgcolor="#2563eb" class="btn-cell" style="border-radius:5px; background-color:#2563eb;">
+                      <a href="{{.VerificationLink}}" target="_blank" class="btn-link" style="display:inline-block; padding:14px 28px; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">Verificar mi cuenta</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Código de verificación opcional -->
+          {{if .ShowToken}}
+          <div style="background-color:#f3f4f6; padding:15px; border-radius:5px; margin:15px 0;">
+            <p style="font-size:12px; color:#6b7280; margin:0;">Código de verificación</p>
+            <p class="text-code" style="font-size:18px; font-weight:bold; font-family:Courier, monospace; color:#111827; margin:5px 0 0 0;">{{.VerificationCode}}</p>
+          </div>
+          {{end}}
+
+          <!-- Enlace alternativo -->
+          <p class="text-dark" style="font-size:12px; color:#6b7280; margin:15px 0 0 0;">Si el botón no funciona, copiá y pegá este enlace en tu navegador:</p>
+          <p class="text-dark" style="font-size:12px; word-break:break-all; margin:5px 0;">
+            <a href="{{.VerificationLink}}" target="_blank" style="color:#2563eb; text-decoration:none;">{{.VerificationLink}}</a>
+          </p>
+
+          <!-- Expiración -->
+          <p class="text-dark" style="font-size:12px; color:#6b7280; margin:10px 0 0 0;">
+            ⏰ Este enlace expira en <strong>{{.ExpirationHours}} horas</strong>.
+          </p>
+
+          <!-- Advertencia de seguridad -->
+          <div class="warning" style="background-color:#fef3c7; border-left:4px solid #f59e0b; padding:12px; margin-top:15px; font-size:12px; color:#92400e; border-radius:5px; text-align:left;">
+            <strong>🔒 Seguridad:</strong> Si no solicitaste este registro, ignorá este correo. Tu cuenta no será activada sin la verificación.
+          </div>
+
+        </td>
+      </tr>
+
+      <!-- Footer -->
+      <tr>
+        <td style="padding:20px 0; text-align:center; font-size:11px; color:#9ca3af;">
+          © {{.Year}} CREA Servicios Tecnológicos SAPEM - ONE Internet<br>
+          Mejorando la calidad de vida de los ciudadanos de Rivadavia<br>
+          <a href="mailto:info@oneinternet.com.ar" style="color:#2563eb; text-decoration:none;">info@oneinternet.com.ar</a> • 
+          <a href="https://wa.me/5492634217506" target="_blank" style="color:#2563eb; text-decoration:none;">+54 9 263 4217506</a>
+        </td>
+      </tr>
+
+    </table>
+
+  </td>
+</tr>
+</table>
+
+</body>
+</html>

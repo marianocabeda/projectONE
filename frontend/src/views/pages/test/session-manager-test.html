@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test - Session Manager</title>
+  <link href="/public/output.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .test-section {
+      background: white;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
+      font-weight: 500;
+    }
+    .status.active {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .status.inactive {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0.25rem;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .log {
+      background: #f3f4f6;
+      padding: 1rem;
+      border-radius: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+    .log-entry {
+      margin: 0.25rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Session Manager - Página de Prueba</h1>
+  
+  <div class="test-section">
+    <h2>Estado Actual</h2>
+    <div id="window-id" class="log-entry"></div>
+    <div id="status-display" class="status inactive">
+      Estado: <span id="status-text">Inicializando...</span>
+    </div>
+    <div class="log-entry">
+      <strong>Última actualización:</strong> <span id="last-update">-</span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Acciones de Prueba</h2>
+    <button onclick="testAuth()">✓ Simular Autenticación</button>
+    <button onclick="testLogout()">✗ Simular Logout</button>
+    <button onclick="testReInit()">🔄 Re-inicializar</button>
+    <button onclick="testClearStorage()">🗑️ Limpiar Storage</button>
+    <button onclick="testForceActive()">⚡ Forzar Activa</button>
+  </div>
+
+  <div class="test-section">
+    <h2>Información de Depuración</h2>
+    <div class="log-entry">
+      <strong>BroadcastChannel disponible:</strong> 
+      <span id="broadcast-support"></span>
+    </div>
+    <div class="log-entry">
+      <strong>localStorage disponible:</strong> 
+      <span id="storage-support"></span>
+    </div>
+    <div class="log-entry">
+      <strong>Datos en localStorage:</strong>
+      <pre id="storage-data" style="background: #f9fafb; padding: 0.5rem; border-radius: 4px;"></pre>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Registro de Eventos</h2>
+    <button onclick="clearLog()">Limpiar Log</button>
+    <div id="event-log" class="log"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Instrucciones</h2>
+    <ol>
+      <li>Haz clic en "Simular Autenticación" para activar el Session Manager</li>
+      <li>Abre esta página en una nueva pestaña</li>
+      <li>Deberías ver el modal "Usar aquí"</li>
+      <li>Prueba las diferentes opciones y observa el comportamiento</li>
+    </ol>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/env.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/auth/token.js"></script>
+  <script src="/js/auth/session-manager.js"></script>
+
+  <script>
+    // Logger personalizado para capturar eventos
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const originalError = console.error;
+    const eventLog = [];
+
+    function addLogEntry(type, message) {
+      const timestamp = new Date().toLocaleTimeString();
+      const entry = { type, message, timestamp };
+      eventLog.push(entry);
+      updateLog();
+    }
+
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+      if (msg.includes('Session Manager') || msg.includes('🪟') || msg.includes('✅') || msg.includes('📨')) {
+        addLogEntry('log', msg);
+      }
+    };
+
+    console.warn = function(...args) {
+      originalWarn.apply(console, args);
+      addLogEntry('warn', args.join(' '));
+    };
+
+    console.error = function(...args) {
+      originalError.apply(console, args);
+      addLogEntry('error', args.join(' '));
+    };
+
+    function updateLog() {
+      const logDiv = document.getElementById('event-log');
+      logDiv.innerHTML = eventLog.slice(-20).reverse().map(entry => {
+        const color = entry.type === 'error' ? '#dc2626' : entry.type === 'warn' ? '#f59e0b' : '#374151';
+        return `<div class="log-entry" style="color: ${color}">
+          [${entry.timestamp}] ${entry.message}
+        </div>`;
+      }).join('');
+    }
+
+    function clearLog() {
+      eventLog.length = 0;
+      updateLog();
+    }
+
+    // Actualizar estado cada segundo
+    setInterval(() => {
+      updateStatus();
+    }, 1000);
+
+    function updateStatus() {
+      const statusDiv = document.getElementById('status-display');
+      const statusText = document.getElementById('status-text');
+      const lastUpdate = document.getElementById('last-update');
+      const windowId = document.getElementById('window-id');
+      const broadcastSupport = document.getElementById('broadcast-support');
+      const storageSupport = document.getElementById('storage-support');
+      const storageData = document.getElementById('storage-data');
+
+      // Window ID
+      if (window.SessionManager) {
+        windowId.textContent = `Window ID: ${window.SessionManager.getWindowId()}`;
+      } else {
+        windowId.textContent = 'Window ID: Session Manager no disponible';
+      }
+
+      // Estado
+      if (window.SessionManager && window.SessionManager.isActiveWindow()) {
+        statusDiv.className = 'status active';
+        statusText.textContent = 'Ventana Activa ✓';
+      } else {
+        statusDiv.className = 'status inactive';
+        statusText.textContent = 'Ventana Inactiva';
+      }
+
+      // Última actualización
+      lastUpdate.textContent = new Date().toLocaleTimeString();
+
+      // Soporte
+      broadcastSupport.textContent = typeof BroadcastChannel !== 'undefined' ? '✓ Sí' : '✗ No';
+      storageSupport.textContent = typeof localStorage !== 'undefined' ? '✓ Sí' : '✗ No';
+
+      // Datos en storage
+      try {
+        const data = localStorage.getItem('active_session_window');
+        if (data) {
+          const parsed = JSON.parse(data);
+          const timeSince = Date.now() - parsed.lastHeartbeat;
+          storageData.textContent = JSON.stringify({
+            ...parsed,
+            timeSinceHeartbeat: `${(timeSince / 1000).toFixed(1)}s`
+          }, null, 2);
+        } else {
+          storageData.textContent = 'No hay datos';
+        }
+      } catch (e) {
+        storageData.textContent = 'Error leyendo datos: ' + e.message;
+      }
+    }
+
+    // Acciones de prueba
+    function testAuth() {
+      localStorage.setItem('access_token', 'test_token_' + Date.now());
+      addLogEntry('log', '✓ Token de prueba creado - Re-inicializando Session Manager...');
+      
+      // Reinicializar Session Manager
+      if (window.SessionManager && typeof window.SessionManager.init === 'function') {
+        window.SessionManager.init();
+      }
+      
+      updateStatus();
+    }
+
+    function testLogout() {
+      localStorage.removeItem('access_token');
+      addLogEntry('log', '✗ Token eliminado');
+      updateStatus();
+    }
+
+    function testReInit() {
+      if (window.SessionManager && typeof window.SessionManager.init === 'function') {
+        window.SessionManager.init();
+        addLogEntry('log', '🔄 Session Manager re-inicializado');
+      } else {
+        addLogEntry('error', 'Session Manager no disponible');
+      }
+    }
+
+    function testClearStorage() {
+      localStorage.removeItem('active_session_window');
+      addLogEntry('log', '🗑️ Storage de Session Manager limpiado');
+      updateStatus();
+    }
+
+    function testForceActive() {
+      if (window.SessionManager) {
+        const windowId = window.SessionManager.getWindowId();
+        localStorage.setItem('active_session_window', JSON.stringify({
+          windowId: windowId,
+          lastHeartbeat: Date.now()
+        }));
+        addLogEntry('log', '⚡ Forzada como ventana activa');
+        
+        // Forzar el flag interno si es posible
+        location.reload();
+      }
+    }
+
+    // Inicializar display
+    updateStatus();
+    addLogEntry('log', '🧪 Página de prueba cargada');
+  </script>
+</body>
+</html>

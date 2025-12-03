@@ -1,0 +1,236 @@
+package handlers
+
+import (
+"encoding/json"
+"fmt"
+"net/http"
+"strconv"
+
+"contrato_one_internet_controlador/internal/servicios"
+"contrato_one_internet_controlador/internal/utilidades"
+
+"github.com/gorilla/mux"
+)
+
+type ContratoFirmaHandlerC struct {
+modeloClient  *servicios.ModeloClient
+correoService *servicios.ServicioCorreo
+}
+
+func NewContratoFirmaHandlerC(modeloClient *servicios.ModeloClient, correoService *servicios.ServicioCorreo) *ContratoFirmaHandlerC {
+return &ContratoFirmaHandlerC{
+modeloClient:  modeloClient,
+correoService: correoService,
+}
+}
+
+// SimularPago llama al modelo y envía el email con el token
+func (h *ContratoFirmaHandlerC) SimularPago(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("DEBUG: SimularPago handler llamado")
+	fmt.Printf("DEBUG: Method=%s Path=%s\n", r.Method, r.URL.Path)
+	
+	vars := mux.Vars(r)
+	fmt.Printf("DEBUG: mux.Vars = %+v\n", vars)
+	
+	idPersonaStr := vars["id_persona"]
+	idContratoStr := vars["id_contrato"]// Validar que sean números
+_, err := strconv.Atoi(idPersonaStr)
+if err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "ID de persona inválido")
+return
+}
+
+_, err = strconv.Atoi(idContratoStr)
+if err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "ID de contrato inválido")
+return
+}
+
+// Llamar al modelo para iniciar el proceso (enviamos strings)
+resp, err := h.modeloClient.SimularPago(r.Context(), idPersonaStr, idContratoStr)
+if err != nil {
+if modeloErr, ok := err.(*servicios.ModeloError); ok {
+utilidades.ResponderError(w, modeloErr.StatusCode, modeloErr.Message)
+} else {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Error al simular pago: "+err.Error())
+}
+return
+}
+
+// Extraer datos de la respuesta del modelo
+contratoFirma, ok := resp["contrato_firma"].(map[string]interface{})
+if !ok {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Respuesta del modelo inválida")
+return
+}
+
+token := utilidades.ToString(contratoFirma["token_firma"])
+email := utilidades.ToString(resp["email"])
+tokenExpira := utilidades.ToString(contratoFirma["token_expira"])
+
+// Generar HTML del email
+htmlBody := generarHTMLTokenFirma(token, tokenExpira)
+
+// Enviar email con el token
+asunto := "Token de Firma Digital - Contrato de Internet"
+err = h.correoService.EnviarEmailHTML(email, asunto, htmlBody)
+if err != nil {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Error enviando email: "+err.Error())
+return
+}
+
+// Construir respuesta para el frontend
+response := map[string]interface{}{
+"mensaje":           "Se ha enviado un token de firma a su correo electrónico",
+"id_contrato_firma": contratoFirma["id_contrato_firma"],
+"pdf_original_url":  fmt.Sprintf("/contratos/original/%s", contratoFirma["pdf_original_path"]),
+"token_expira":      tokenExpira,
+}
+
+utilidades.ResponderJSON(w, http.StatusOK, response)
+}
+
+// GuardarFirma recibe la firma en canvas y la envía al modelo
+func (h *ContratoFirmaHandlerC) GuardarFirma(w http.ResponseWriter, r *http.Request) {
+vars := mux.Vars(r)
+idStr := vars["id"]
+
+// Validar que sea número
+_, err := strconv.Atoi(idStr)
+if err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "ID de contrato firma inválido")
+return
+}
+
+var body map[string]interface{}
+if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "Cuerpo de solicitud inválido")
+return
+}
+
+// Obtener IP y User-Agent del request
+body["ip_firma"] = r.RemoteAddr
+body["user_agent"] = r.UserAgent()
+
+// Llamar al modelo (enviamos string)
+resp, err := h.modeloClient.GuardarFirma(r.Context(), idStr, body)
+if err != nil {
+if modeloErr, ok := err.(*servicios.ModeloError); ok {
+utilidades.ResponderError(w, modeloErr.StatusCode, modeloErr.Message)
+} else {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Error al guardar firma: "+err.Error())
+}
+return
+}
+
+utilidades.ResponderJSON(w, http.StatusOK, resp)
+}
+
+// ValidarToken valida el token y genera el PDF firmado
+func (h *ContratoFirmaHandlerC) ValidarToken(w http.ResponseWriter, r *http.Request) {
+vars := mux.Vars(r)
+idStr := vars["id"]
+
+// Validar que sea número
+_, err := strconv.Atoi(idStr)
+if err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "ID de contrato firma inválido")
+return
+}
+
+var body map[string]interface{}
+if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "Cuerpo de solicitud inválido")
+return
+}
+
+// Llamar al modelo (enviamos string)
+resp, err := h.modeloClient.ValidarToken(r.Context(), idStr, body)
+if err != nil {
+if modeloErr, ok := err.(*servicios.ModeloError); ok {
+utilidades.ResponderError(w, modeloErr.StatusCode, modeloErr.Message)
+} else {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Error al validar token: "+err.Error())
+}
+return
+}
+
+utilidades.ResponderJSON(w, http.StatusOK, resp)
+}
+
+// ObtenerContrato obtiene el estado del contrato firma
+func (h *ContratoFirmaHandlerC) ObtenerContrato(w http.ResponseWriter, r *http.Request) {
+vars := mux.Vars(r)
+idStr := vars["id"]
+
+// Validar que sea número
+_, err := strconv.Atoi(idStr)
+if err != nil {
+utilidades.ResponderError(w, http.StatusBadRequest, "ID de contrato firma inválido")
+return
+}
+
+// Llamar al modelo (enviamos string)
+resp, err := h.modeloClient.ObtenerContratoFirma(r.Context(), idStr)
+if err != nil {
+if modeloErr, ok := err.(*servicios.ModeloError); ok {
+utilidades.ResponderError(w, modeloErr.StatusCode, modeloErr.Message)
+} else {
+utilidades.ResponderError(w, http.StatusInternalServerError, "Error al obtener contrato: "+err.Error())
+}
+return
+}
+
+utilidades.ResponderJSON(w, http.StatusOK, resp)
+}
+
+// generarHTMLTokenFirma genera el HTML del email con el token
+func generarHTMLTokenFirma(token, tokenExpira string) string {
+return fmt.Sprintf(`
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .content { background-color: #f9f9f9; padding: 20px; }
+        .token { 
+            background-color: #fff; 
+            border: 2px dashed #4CAF50; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 24px; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            margin: 20px 0; 
+        }
+        .footer { text-align: center; color: #777; font-size: 12px; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Token de Firma Digital</h1>
+        </div>
+        <div class="content">
+            <p>Estimado cliente,</p>
+            <p>Se ha generado su contrato de servicio de Internet. Para firmarlo digitalmente, utilice el siguiente token:</p>
+            <div class="token">%s</div>
+            <p><strong>Importante:</strong></p>
+            <ul>
+                <li>Este token es válido hasta: <strong>%s</strong></li>
+                <li>Tiene un máximo de 3 intentos para utilizarlo</li>
+                <li>No comparta este token con nadie</li>
+            </ul>
+            <p>Para firmar su contrato, ingrese al portal de clientes y siga las instrucciones.</p>
+        </div>
+        <div class="footer">
+            <p>Este es un correo automático, por favor no responder.</p>
+        </div>
+    </div>
+</body>
+</html>
+`, token, tokenExpira)
+}

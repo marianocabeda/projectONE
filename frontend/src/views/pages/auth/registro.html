@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro | ONE Internet</title>
+  <!-- Tailwind CSS (local) -->
+  <link href="/public/output.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-50 min-h-screen font-sans antialiased flex flex-col">
+
+  <!-- Header dinámico -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center">
+    <div class="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative bg-white border border-gray-200 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl">
+        
+        <!-- Logo -->
+        <div class="flex justify-center pt-8 pb-4">
+          <img 
+            src="/images/logos/one-negro.png" 
+            alt="Logo ONE Internet" 
+            class="h-16 drop-shadow-md"
+          />
+        </div>
+
+        <!-- Título principal -->
+        <div class="text-center px-6">
+          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
+            Bienvenido al Portal de Clientes
+          </h1>
+          <p class="mt-3 text-sm sm:text-base text-gray-500 max-w-lg mx-auto">
+            Regístrate y disfruta del servicio de Internet de alta velocidad más confiable.
+          </p>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="text-center mt-6 pb-8">
+          <a href="/formulario" class="inline-block px-6 py-3 text-sm font-medium text-white bg-principal-500 hover:bg-principal-400 rounded-lg transition-colors duration-300">
+            Registrarse Ahora
+          </a>
+        </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
+        <!-- Servicio Técnico -->
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2 text-base">Servicio Técnico Gratuito*</h3>
+          <p class="text-gray-600">
+            Asistencia telefónica, en línea y a domicilio.
+          </p>
+          <p class="text-gray-500 text-xs mt-2 italic">
+            *No incluye daños por el cliente.
+          </p>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2 text-base">Contáctenos</h3>
+          <p class="text-gray-600">
+            <a href="https://wa.me/5492634217506" target="_blank" class="hover:text-principal-400 transition flex items-center gap-2">
+              +54 9 263 4217506
+            </a>
+          </p>
+          <p class="text-gray-600 mt-1">
+            <a href="mailto:info@oneinternet.com.ar" class="hover:text-principal-400 transition">
+              info@oneinternet.com.ar
+            </a>
+          </p>
+        </div>
+
+        <!-- Acerca de -->
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2 text-base">CREA Servicios Tecnológicos SAPEM</h3>
+          <p class="text-gray-600">
+            Equipo comprometido con mejorar la calidad de vida en Rivadavia mediante redes de datos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pie de página inferior -->
+      <div class="mt-6 pt-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+        <div>© <span id="year"></span> CREA Servicios Tecnológicos SAPEM. Todos los derechos reservados.</div>
+        <div class="mt-2 sm:mt-0">Versión 1.0.0</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/env.js"></script>
+  <script src="/js/utils/logger.js"></script>
+  <!-- CSRF protection: Handled by SameSite cookies (backend) + credentials: 'include' (http.js) -->
+  <script src="/js/config.js"></script>
+  <script src="/js/auth/redirigir-si-autenticado.js"></script>
+  <script type="module" src="/js/encabezado-publico.js"></script>
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

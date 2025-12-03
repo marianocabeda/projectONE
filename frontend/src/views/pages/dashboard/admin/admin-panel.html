@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+</head>
+
+<body>
+    <main id="page-content" class="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6">
+        <div class="mb-6 sm:mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-dark-text-primary mb-2">Panel de Administración</h1>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-dark-text-secondary">Gestión de recursos humanos y configuraciones del sistema</p>
+        </div>
+
+        <!-- Tarjetas de navegación rápida -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <!-- Usuarios -->
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-4 sm:p-6 text-white cursor-pointer hover:shadow-xl transition-shadow active:scale-95" data-section="usuarios">
+                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                    <i class="fas fa-users text-3xl sm:text-4xl opacity-80"></i>
+                    <span id="total-usuarios" class="text-2xl sm:text-3xl font-bold">0</span>
+                </div>
+                <h3 class="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Usuarios</h3>
+                <p class="text-blue-100 text-xs sm:text-sm">Gestionar cuentas de usuario</p>
+            </div>
+
+            <!-- Planes y Precios -->
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-4 sm:p-6 text-white cursor-pointer hover:shadow-xl transition-shadow active:scale-95" data-section="planes">
+                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                    <i class="fas fa-tags text-3xl sm:text-4xl opacity-80"></i>
+                    <span id="total-planes" class="text-2xl sm:text-3xl font-bold">0</span>
+                </div>
+                <h3 class="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Planes y Precios</h3>
+                <p class="text-green-100 text-xs sm:text-sm">Configurar servicios</p>
+            </div>
+
+            <!-- Roles y Permisos -->
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg p-4 sm:p-6 text-white cursor-pointer hover:shadow-xl transition-shadow active:scale-95" data-section="roles">
+                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                    <i class="fas fa-shield-alt text-3xl sm:text-4xl opacity-80"></i>
+                    <span id="total-roles" class="text-2xl sm:text-3xl font-bold">0</span>
+                </div>
+                <h3 class="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Roles y Permisos</h3>
+                <p class="text-purple-100 text-xs sm:text-sm">Control de acceso</p>
+            </div>
+
+            <!-- Reportes -->
+            <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg shadow-lg p-4 sm:p-6 text-white cursor-pointer hover:shadow-xl transition-shadow active:scale-95" data-section="reportes">
+                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                    <i class="fas fa-chart-bar text-3xl sm:text-4xl opacity-80"></i>
+                    <span class="text-2xl sm:text-3xl font-bold"><i class="fas fa-file-alt"></i></span>
+                </div>
+                <h3 class="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Reportes</h3>
+                <p class="text-orange-100 text-xs sm:text-sm">Estadísticas y análisis</p>
+            </div>
+        </div>
+
+        <!-- Contenedor de sección activa -->
+        <div id="admin-section-content">
+            <!-- Vista inicial: Dashboard de bienvenida -->
+            <div id="section-dashboard" class="section-view">
+                <div class="bg-white dark:bg-dark-bg-card rounded-lg shadow-md p-8 transition-colors duration-300">
+                    <div class="text-center py-12">
+                        <i class="fas fa-user-shield text-6xl text-principal-600 dark:text-dark-principal-600 mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-dark-text-primary mb-2">Bienvenido al Panel de Administración</h2>
+                        <p class="text-gray-600 dark:text-dark-text-secondary mb-6">Selecciona una opción arriba para comenzar a gestionar el sistema</p>
+                    </div>
+
+                    <!-- Estadísticas rápidas -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 sm:p-6 border border-green-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-semibold text-green-700">Usuarios Activos</h4>
+                                <i class="fas fa-user-check text-2xl text-green-600"></i>
+                            </div>
+                            <p id="stat-usuarios-activos" class="text-3xl font-bold text-green-900">
+                                <i class="fas fa-spinner fa-spin text-2xl"></i>
+                            </p>
+                            <p class="text-xs text-green-600 mt-2">Total de usuarios registrados</p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-semibold text-blue-700">Solicitudes Hoy</h4>
+                                <i class="fas fa-clipboard-list text-2xl text-blue-600"></i>
+                            </div>
+                            <p id="stat-solicitudes-hoy" class="text-3xl font-bold text-blue-900">
+                                <i class="fas fa-spinner fa-spin text-2xl"></i>
+                            </p>
+                            <p class="text-xs text-blue-600 mt-2">Solicitudes procesadas hoy</p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-6 border border-yellow-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-semibold text-yellow-700">Ingresos del Mes</h4>
+                                <i class="fas fa-dollar-sign text-2xl text-yellow-600"></i>
+                            </div>
+                            <p id="stat-ingresos-mes" class="text-3xl font-bold text-yellow-900">
+                                <i class="fas fa-spinner fa-spin text-2xl"></i>
+                            </p>
+                            <p class="text-xs text-yellow-600 mt-2">Facturación mensual</p>
+                        </div>
+                    </div>
+
+                    <!-- Accesos rápidos -->
+                    <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200">
+                        <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Accesos Rápidos</h3>
+                        <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                            <button onclick="AdminPanel.showSection('usuarios')" class="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-center">
+                                <i class="fas fa-users text-2xl text-blue-600 mb-2"></i>
+                                <p class="text-sm font-medium text-blue-900">Gestionar Usuarios</p>
+                            </button>
+                            <button onclick="AdminPanel.crearUsuario()" class="p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-center">
+                                <i class="fas fa-user-plus text-2xl text-green-600 mb-2"></i>
+                                <p class="text-sm font-medium text-green-900">Crear Usuario</p>
+                            </button>
+                            <button onclick="AdminPanel.filtrarPorRol('verificador'); AdminPanel.showSection('usuarios');" class="p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition-colors text-center">
+                                <i class="fas fa-user-check text-2xl text-yellow-600 mb-2"></i>
+                                <p class="text-sm font-medium text-yellow-900">Ver Verificadores</p>
+                            </button>
+                            <button onclick="AdminPanel.showSection('planes')" class="p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-center">
+                                <i class="fas fa-tags text-2xl text-purple-600 mb-2"></i>
+                                <p class="text-sm font-medium text-purple-900">Gestionar Planes</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Gestión de Usuarios -->
+            <div id="section-usuarios" class="section-view hidden">
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Gestión de Usuarios</h2>
+                        <button id="btn-nuevo-usuario" class="w-full sm:w-auto boton boton-principal px-4 py-2 rounded-lg transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Nuevo Usuario
+                        </button>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="bg-gray-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                            <input type="text" id="filter-usuario-buscar" placeholder="Buscar..." 
+                                class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm sm:text-base">
+                            <select id="filter-usuario-rol" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500 text-sm sm:text-base">
+                                <option value="todos">Todos los roles</option>
+                                <option value="cliente">Cliente</option>
+                                <option value="empresa">Empresa</option>
+                                <option value="verificador">Verificador</option>
+                                <option value="atencion_publico">Atención al Público</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                            <select id="filter-usuario-estado" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-principal-500 focus:border-principal-500">
+                                <option value="todos">Todos los estados</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                            <button id="btn-limpiar-filtros-usuarios" class="boton boton-blanco px-4 py-2 border border-gray-300 rounded-lg transition-colors">
+                                <i class="fas fa-redo mr-2"></i>Limpiar
+                            </button>
+                        </div>
+                        <!-- Filtros rápidos -->
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <button onclick="AdminPanel.filtrarPorRol('verificador')" 
+                                class="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded-full hover:bg-yellow-200 transition-colors">
+                                <i class="fas fa-user-check mr-1"></i>Solo Verificadores
+                            </button>
+                            <button onclick="AdminPanel.filtrarPorRol('cliente')" 
+                                class="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors">
+                                <i class="fas fa-user mr-1"></i>Solo Clientes
+                            </button>
+                            <button onclick="AdminPanel.filtrarPorRol('todos')" 
+                                class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-users mr-1"></i>Ver Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de usuarios -->
+                    <div id="usuarios-loading" class="hidden text-center py-8">
+                        <i class="fas fa-spinner fa-spin text-3xl text-principal-600"></i>
+                    </div>
+
+                    <div id="usuarios-tabla-container" class="overflow-x-auto bg-white rounded-lg shadow -mx-4 sm:mx-0">
+                        <table class="w-full min-w-max">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Usuario</th>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Contacto</th>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Rol</th>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Estado</th>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">Registro</th>
+                                    <th class="px-3 sm:px-4 py-2 sm:py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider whitespace-nowrap">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuarios-tbody" class="bg-white divide-y divide-gray-200">
+                                <!-- Usuarios se cargarán aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Información de resultados -->
+                    <div class="mt-4 text-sm text-gray-600 text-center">
+                        <span id="usuarios-count">Cargando usuarios...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Gestión de Planes -->
+            <div id="section-planes" class="section-view hidden">
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Gestión de Planes y Precios</h2>
+                        <button id="btn-nuevo-plan" class="w-full sm:w-auto boton boton-principal px-4 py-2 rounded-lg transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Nuevo Plan
+                        </button>
+                    </div>
+
+                    <div id="planes-loading" class="hidden text-center py-6 sm:py-8">
+                        <i class="fas fa-spinner fa-spin text-2xl sm:text-3xl text-principal-600"></i>
+                    </div>
+
+                    <div id="planes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        <!-- Planes se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Roles y Permisos -->
+            <div id="section-roles" class="section-view hidden">
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Roles y Permisos</h2>
+                        <button id="btn-nuevo-rol" class="w-full sm:w-auto boton boton-principal px-4 py-2 rounded-lg transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Nuevo Rol
+                        </button>
+                    </div>
+
+                    <div id="roles-loading" class="hidden text-center py-8">
+                        <i class="fas fa-spinner fa-spin text-3xl text-principal-600"></i>
+                    </div>
+
+                    <div id="roles-container" class="space-y-4">
+                        <!-- Roles se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Reportes -->
+            <div id="section-reportes" class="section-view hidden">
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Reportes y Estadísticas</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                        <!-- Reporte de usuarios -->
+                        <div class="border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-3 sm:mb-4">
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-800">Reporte de Usuarios</h3>
+                                <i class="fas fa-users text-blue-600 text-xl sm:text-2xl"></i>
+                            </div>
+                            <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">Descargar listado completo de usuarios registrados</p>
+                            <button class="w-full boton boton-azul-claro px-4 py-2 text-sm sm:text-base rounded-lg active:scale-95 transition-transform">
+                                <i class="fas fa-download mr-2"></i>Descargar Excel
+                            </button>
+                        </div>
+
+                        <!-- Reporte de solicitudes -->
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Reporte de Solicitudes</h3>
+                                <i class="fas fa-clipboard-list text-green-600 text-2xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Historial de todas las solicitudes procesadas</p>
+                            <button class="w-full boton boton-verde px-4 py-2 rounded-lg">
+                                <i class="fas fa-download mr-2"></i>Descargar Excel
+                            </button>
+                        </div>
+
+                        <!-- Reporte financiero -->
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Reporte Financiero</h3>
+                                <i class="fas fa-dollar-sign text-yellow-600 text-2xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Ingresos, facturación y pagos</p>
+                            <button class="w-full boton boton-amarillo px-4 py-2 rounded-lg">
+                                <i class="fas fa-download mr-2"></i>Descargar Excel
+                            </button>
+                        </div>
+
+                        <!-- Reporte de conexiones -->
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Reporte de Conexiones</h3>
+                                <i class="fas fa-wifi text-purple-600 text-2xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Estado de todas las conexiones activas</p>
+                            <button class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                                <i class="fas fa-download mr-2"></i>Descargar Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script del panel de administración -->
+    <script src="/js/dashboard/administrador/admin-panel.js"></script>
+</body>
+
+</html>
