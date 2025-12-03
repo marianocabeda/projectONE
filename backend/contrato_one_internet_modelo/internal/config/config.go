@@ -54,14 +54,10 @@ func LoadConfig() (AppConfig, error) {
 	if cfg.DBConfig.DBName == "" {
 		return cfg, errors.New("DB_NAME no puede estar vacío")
 	}
-	// No exigir JWT si estamos ejecutando en modo "import"
+	// No exigir JWT si se está ejecutando en modo "import"
 	if cfg.AppEnv != "import" && cfg.InternalJWTSecret == "" {
 		return cfg, errors.New("INTERNAL_JWT_SECRET no puede estar vacío")
 	}
-
-	/*if cfg.InternalJWTSecret == "" {
-		return cfg, errors.New("INTERNAL_JWT_SECRET no puede estar vacío")
-	}*/
 
 	return cfg, nil
 }

@@ -9,9 +9,7 @@ import (
 var (
 	emailRegex    = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
 	telefonoRegex = regexp.MustCompile(`^\+?[0-9\s\(\)-]{7,20}$`) // Flexible para varios formatos
-	//cuitRegex     = regexp.MustCompile(`^\d{2}-\d{8}-\d$`)
 	cuilRegex     = regexp.MustCompile(`^\d{11}$`)
-	//cuilRegex     = regexp.MustCompile(`^\d{2}-\d{8}-\d$`)
 	cuitRegex     = regexp.MustCompile(`^\d{11}$`)
 )
 

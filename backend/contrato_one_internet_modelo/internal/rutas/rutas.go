@@ -12,7 +12,7 @@ import (
 	direccion "contrato_one_internet_modelo/internal/handlers/direccion"
 	estado_conexion "contrato_one_internet_modelo/internal/handlers/estado_conexion"
 	estado_contrato "contrato_one_internet_modelo/internal/handlers/estado_contrato"
-	"contrato_one_internet_modelo/internal/handlers/geografia" // Importa el paquete correcto
+	"contrato_one_internet_modelo/internal/handlers/geografia" 
 	notificaciones "contrato_one_internet_modelo/internal/handlers/notificaciones"
 	perfil "contrato_one_internet_modelo/internal/handlers/perfil"
 	permiso "contrato_one_internet_modelo/internal/handlers/permiso"
@@ -42,8 +42,6 @@ func SetupRutas(db *sql.DB, cfg config.AppConfig) *mux.Router {
 	//clientesHandler := clientes.NewClientesHandler(clientesService)
 	geografiaHandler := geografia.NewHandler(geografiaRepo)
 	// Nueva inyección para el flujo de Personas
-	//personaService := servicios.NewPersonaService(db)
-	//personasHandler := personas.NewPersonasHandler(personaService)
 	usuarioService := servicios.NewUsuarioService(db) // Nuevo servicio
 	personasHandler := personas.NewPersonasHandler(usuarioService)
 	perfilesHandler := personas.NewPerfilHandler(usuarioService)
@@ -125,11 +123,7 @@ func SetupRutas(db *sql.DB, cfg config.AppConfig) *mux.Router {
 	protectedRouter.HandleFunc("/departamentos", geografiaHandler.ObtenerDepartamentos).Methods("GET")
 	protectedRouter.HandleFunc("/distritos", geografiaHandler.ObtenerDistritos).Methods("GET")
 
-	// Nuevo endpoint para crear persona con dirección
-	//protectedRouter.HandleFunc("/personas", personasHandler.CrearPersonaCompletaHandler).Methods("POST")
-	// Endpoint para el nuevo flujo completo. Este endpoint debe estar protegido en el servicio
-	// 'modelo' (solo accesible desde el controlador interno). Por eso lo dejamos en el subrouter
-	// protegido por AutenticacionInterna.
+	// Endpoint interno para crear persona y usuario (protegido)
 	protectedRouter.HandleFunc("/personas-con-usuario", personasHandler.CrearPersonaYUsuarioHandler).Methods("POST")
 
 	// Endpoints internos para obtener perfil y dirección de una persona
@@ -264,10 +258,7 @@ func SetupRutas(db *sql.DB, cfg config.AppConfig) *mux.Router {
 	// Rutas de negocio protegidas (ejemplo)
 	businessRouter := apiV1.PathPrefix("").Subrouter()
 	businessRouter.Use(middleware.AutenticacionInterna(cfg.InternalJWTSecret))
-	/*
-		businessRouter.HandleFunc("/clientes/particulares", clientesHandler.CrearClienteParticular).Methods("POST")
-		businessRouter.HandleFunc("/clientes/empresas", clientesHandler.CrearClienteEmpresa).Methods("POST")
-	*/
+	
 	// Rutas publicas de planes
 	apiV1.HandleFunc("/tipo-plan", planesHandler.ListarTipoPlanes).Methods("GET")
 	apiV1.HandleFunc("/planes", planesHandler.ListarPlanes).Methods("GET")

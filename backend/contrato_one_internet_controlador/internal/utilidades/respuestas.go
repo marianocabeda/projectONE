@@ -33,31 +33,3 @@ func ResponderError(w http.ResponseWriter, status int, message string) {
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(response)
 }
-
-
-
-
-/*package utilidades
-
-import (
-	"encoding/json"
-	"net/http"
-)
-
-// ResponderJSON envía una respuesta JSON estándar.
-func ResponderJSON(w http.ResponseWriter, status int, payload interface{}) {
-	response, err := json.Marshal(payload)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	w.Write(response)
-}
-
-// ResponderError envía una respuesta de error JSON estándar.
-func ResponderError(w http.ResponseWriter, status int, message string) {
-	ResponderJSON(w, status, map[string]string{"error": message})
-}*/

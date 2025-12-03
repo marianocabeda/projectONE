@@ -9,7 +9,6 @@ import (
 
 	"contrato_one_internet_modelo/internal/config"
 
-	// Driver de MySQL/MariaDB
 	_ "github.com/go-sql-driver/mysql"
 )
 

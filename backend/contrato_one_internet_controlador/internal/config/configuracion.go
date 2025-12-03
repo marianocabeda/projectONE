@@ -32,18 +32,6 @@ type Config struct {
 func GetConfig() Config {
 	jwtExpiration, jwtMinutes := getJWTExpirationConfig()
 
-	/*
-	// Leemos la base de ngrok
-	ngrokURL := getEnv("URL_NGROK", "")
-
-	// Construimos dinámicamente las URLs del frontend
-	frontendURL := ""
-	passwordResetURL := ""
-	if ngrokURL != "" {
-		frontendURL = ngrokURL + "/verificar-email"
-		passwordResetURL = ngrokURL + "/cambiar-password"
-	}*/
-
 	return Config{
 		APIPort:              getEnv("API_PORT", "8080"),
 		ModelURL:             getEnv("MODEL_URL", "http://localhost:8081"),
@@ -59,10 +47,10 @@ func GetConfig() Config {
 		FrontendURL:          getEnv("FRONTEND_URL", ""),
 		//FrontendURL:            frontendURL,
 		BackendPublicURL:       getEnv("BACKEND_PUBLIC_URL", ""),
-		EmailTemplatePath:      getEnv("EMAIL_TEMPLATE_PATH", "mail.html"),
-		EmailResetTemplatePath: getEnv("EMAIL_RESET_TEMPLATE_PATH", "mail-recuperar.html"),
-		EmailCredentialsTemplatePath: getEnv("EMAIL_CREDENCIALES_TEMPLATE_PATH", "mail-credenciales.html"),
-		EmailTokenFirmaTemplatePath: getEnv("EMAIL_TOKEN_FIRMA_TEMPLATE_PATH", "mail-token-firma.html"),
+		EmailTemplatePath:      getEnv("EMAIL_TEMPLATE_PATH", "assets/mail_templates/mail.html"),
+		EmailResetTemplatePath: getEnv("EMAIL_RESET_TEMPLATE_PATH", "assets/mail_templates/mail-recuperar.html"),
+		EmailCredentialsTemplatePath: getEnv("EMAIL_CREDENCIALES_TEMPLATE_PATH", "assets/mail_templates/mail-credenciales.html"),
+		EmailTokenFirmaTemplatePath: getEnv("EMAIL_TOKEN_FIRMA_TEMPLATE_PATH", "assets/mail_templates/mail-token-firma.html"),
 		LogoLightPath:          getEnv("LOGO_LIGHT_PATH", "assets/logo-light.png"),
 		LogoDarkPath:           getEnv("LOGO_DARK_PATH", "assets/logo-dark.png"),
 		FrontendPasswordResetURL: getEnv("FRONTEND_PASSWORD_RESET_URL", ""),
@@ -88,7 +76,7 @@ func getJWTExpirationConfig() (time.Duration, int) {
 		}
 	}
 
-	// Prioridad 2: JWT_EXPIRATION_HOURS (legacy)
+	// Prioridad 2: JWT_EXPIRATION_HOURS
 	if hoursStr, exists := os.LookupEnv("JWT_EXPIRATION_HOURS"); exists {
 		if hours, err := strconv.Atoi(hoursStr); err == nil && hours > 0 {
 			minutes := hours * 60

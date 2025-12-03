@@ -30,8 +30,7 @@ import (
 // SetupRutas configura las rutas públicas del controlador.
 func SetupRutas(clientesHandler *clientes.ClientesHandler,
 	geografiaHandler *geolocalizacion.Handler,
-	// Ya no inyectamos el AuthHandler aquí, lo creamos dentro con los servicios
-	// Pero si prefieres inyectarlo, cambia la firma. Aquí asumo que pasas los servicios necesarios.
+	// Ya no se inyecta el AuthHandler aquí, se crea dentro con los servicios necesarios
 	AuthService *servicios.AuthService,
 	cfg *config.Config,
 	personasHandler *clientes.PersonasHandler,
@@ -50,7 +49,7 @@ func SetupRutas(clientesHandler *clientes.ClientesHandler,
 		cfg.FromEmail, cfg.FromName, cfg.EmailTemplatePath,
 		cfg.EmailResetTemplatePath,
 		cfg.EmailCredentialsTemplatePath,
-		"/var/www/html/contratos/backend/contrato_one_internet_controlador/mail-token-firma.html",
+		cfg.EmailTokenFirmaTemplatePath,
 		cfg.LogoLightPath, cfg.LogoDarkPath,
 	)
 

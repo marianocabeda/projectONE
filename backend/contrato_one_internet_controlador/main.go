@@ -39,12 +39,6 @@ func main() {
 		logger.Error.Fatalf("Configuración inválida: %v", err)
 	}
 
-	// Log de configuración JWT
-	logger.Info.Printf("=== Configuración JWT ===")
-	logger.Info.Printf("Tiempo de expiración del Access Token: %d minutos", cfg.JWTExpirationMinutes)
-	logger.Info.Printf("Duración del Access Token: %v", cfg.JWTExpiration)
-	logger.Info.Printf("=========================")
-
 	// Crear el cliente para el servicio Modelo (se autentica al crearse)
 	modeloClient, err := servicios.NewModeloClient(cfg.ModelURL)
 	if err != nil {

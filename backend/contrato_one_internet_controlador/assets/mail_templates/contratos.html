@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitud de Servicio One Internet</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.8cm 1.5cm 1.5cm 1.5cm;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9.5pt; 
+            color: #000;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            line-height: 1.25;
+        }
+
+        /* --- ENCABEZADO --- */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            margin-bottom: 5px;
+            border: 1px solid #777;
+            border-radius: 12px;
+            padding: 15px 20px; 
+            background-color: #fcfcfc;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            /* Margen negativo a la derecha para compensar el espacio y acercar el texto */
+            margin-right: -2px; 
+        }
+
+        .logo-one {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 58pt; 
+            font-weight: bold;
+            line-height: 0.8;
+            color: #222;
+            /* Separación ajustada: un poco más separadas que antes (-1px vs -3px) */
+            letter-spacing: -1px; 
+            margin-bottom: 2px;
+            margin-left: -3px;
+        }
+
+        .logo-internet {
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+            color: #555;
+            letter-spacing: 0.5px; 
+            margin-left: 2px;
+        }
+        
+        .squares { 
+            color: #777; 
+            font-size: 10pt; 
+            vertical-align: baseline;
+            margin-left: 4px;
+            letter-spacing: 1px;
+        }
+
+        .company-data {
+            font-size: 8pt; 
+            /* Margen reducido para mantener la "E" pegada al texto */
+            margin-left: 15px; 
+            padding-left: 15px;
+            border-left: 1px solid #888;
+            color: #222;
+            line-height: 1.35;
+        }
+
+        .title-box {
+            background-color: #666;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12pt; 
+            display: inline-block;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        /* --- FECHA --- */
+        .date-line {
+            text-align: right;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 13pt;
+            margin-right: 5px;
+            margin-top: 15px;
+            color: #222;
+        }
+
+        /* --- TEXTO LEGAL --- */
+        .legal-text {
+            font-size: 9.5pt;
+            text-align: justify;
+            margin-bottom: 15px;
+            line-height: 1.25;
+            color: #000;
+        }
+
+        /* --- TÍTULOS DE SECCIÓN --- */
+        .section-title {
+            font-weight: 800;
+            font-size: 9.5pt;
+            color: #000;
+            margin-top: 10px;
+            margin-bottom: 3px;
+        }
+
+        .data-row {
+            display: flex;
+            margin-bottom: 0px;
+            font-size: 9.5pt;
+            align-items: flex-start;
+            padding-top: 1px;
+        }
+
+        /* ALINEACIÓN PERFECTA DE ETIQUETAS */
+        .label-fixed {
+            width: 290px;
+            text-align: right;
+            color: #000;
+            font-weight: normal; /* Sin negrita en etiquetas */
+            padding-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .value {
+            color: #000;
+            flex-grow: 1;
+            font-weight: normal;
+            text-align: left;
+        }
+
+        /* Clase para precios en negrita */
+        .price-bold {
+            font-weight: bold;
+        }
+
+        /* --- SOPORTE TÉCNICO --- */
+        .support-text {
+            font-size: 9.5pt;
+            line-height: 1.2;
+            text-align: justify;
+            padding-right: 10px;
+        }
+
+        /* --- FIRMA --- */
+        .signature-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .signature-box {
+            width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .signature-img-wrapper {
+            min-height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .signature-line {
+            width: 100%;
+            border-top: 1px solid #000;
+            margin: 0;
+        }
+
+        .signature-label {
+            margin-top: 5px;
+            font-size: 9pt;
+            font-weight: bold;
+        }
+
+        /* Estilo para Nº de Cuenta (AHORA EN NEGRITA) */
+        .account-number {
+            margin-top: 10px;
+            margin-bottom: 3px;
+            font-size: 9.5pt;
+            font-weight: bold; /* Negrita aplicada */
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="logo-section">
+            <div class="logo-wrapper">
+                <div class="logo-one">one</div>
+                <div class="logo-internet">internet <span class="squares">■■■</span></div>
+            </div>
+            
+            <div class="company-data">
+                <strong>CREA Servicios Tecnológicos S.A.P.E.M.</strong><br>
+                CUIT: 30-71646883-2<br>
+                Sarmiento 514 Rivadavia - Mendoza<br>
+                Teléfono: 2634 445162 / 445163<br>
+                <strong>WhatsApp: 2634 217506</strong><br>
+                <strong>www.oneinternet.com.ar</strong>
+            </div>
+        </div>
+        
+        <div class="title-box-container">
+            <div class="title-box">Solicitud de Servicio</div>
+        </div>
+    </div>
+
+    <div class="date-line">
+        {{.FechaGeneracion}}
+    </div>
+
+    <div class="legal-text">
+        La presente <strong>"Solicitud de Servicio"</strong> de Conexión Acceso a Internet, se regirá por los <strong>"Términos y
+        Condiciones"</strong> de Prestación del Servicio, <strong>"Equipos en comodato"</strong> y <strong>"Condiciones Particulares"</strong>
+        del servicio seleccionado, según se detallada en posteriores anexos.<br>
+        La firma de la presente Solicitud de Servicio, constituirá prueba de la voluntad de las partes, de
+        obligarse legalmente de acuerdo a lo dispuesto en el/los anexos antes referenciados, y los demás
+        anexos que pudieran incluirse a la presente.
+    </div>
+
+    <div class="account-number">Nº de Cuenta: {{.NumeroCuenta}}</div>
+
+    <div class="section-title">Datos del Solicitante</div>
+    <div class="data-row">
+        <span class="label-fixed">Apellido y Nombres - Razón Social:</span>
+        <span class="value">{{.NombreCompleto}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Otra denominación:</span>
+        <span class="value">{{.OtraDenominacion}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">DNI:</span>
+        <span class="value">{{.DNI}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Fecha de Nacimiento:</span>
+        <span class="value">{{.FechaNacimiento}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">CUIL:</span>
+        <span class="value">{{.CUIL}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Condición ante el IVA:</span>
+        <span class="value">{{.CondicionIVA}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Email:</span>
+        <span class="value">{{.Email}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Teléfono:</span>
+        <span class="value">{{.Telefono}}</span>
+    </div>
+
+    <div class="section-title">Domicilio Legal</div>
+    <div class="data-row">
+        <span class="label-fixed">Calle:</span>
+        <span class="value">{{.DomLegalCalle}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Número:</span>
+        <span class="value">{{.DomLegalNumero}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Local/ Depto/ Piso:</span>
+        <span class="value">{{.DomLegalPiso}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Localidad:</span>
+        <span class="value">{{.DomLegalLocalidad}} - Mendoza Código Postal: {{.DomLegalCP}}</span>
+    </div>
+
+    <div class="section-title">Domicilio de Prestación del Servicio</div>
+    <div class="data-row">
+        <span class="label-fixed">Calle:</span>
+        <span class="value">{{.DomInstalacionCalle}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Número:</span>
+        <span class="value">{{.DomInstalacionNumero}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Local/ Depto/ Piso:</span>
+        <span class="value">{{.DomInstalacionPiso}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Localidad:</span>
+        <span class="value">{{.DomInstalacionLocalidad}} - Mendoza Código Postal: {{.DomInstalacionCP}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Email:</span>
+        <span class="value">{{.Email}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Teléfono:</span>
+        <span class="value">{{.Telefono}}</span>
+    </div>
+
+    <div class="section-title">Condiciones Particulares</div>
+    <div class="data-row">
+        <span class="label-fixed">Denominación Comercial:</span>
+        <span class="value">{{.PlanNombre}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Velocidad de descarga:</span>
+        <span class="value">{{.PlanVelocidad}}</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Tipo de Servicio:</span>
+        <span class="value">Ancho de banda compartido</span>
+    </div>
+    <div class="data-row">
+        <span class="label-fixed">Costo abono mensual:</span>
+        <span class="value"><span class="price-bold">$ {{.PrecioMensual}}</span> (Pago mes adelantado).</span>
+    </div>
+
+    <div class="data-row">
+        <span class="label-fixed">Soporte Técnico:</span>
+        <div class="value support-text">
+            Ante una indisponibilidad del Servicio, ONE internet pone a disposición su Centro de Atención al Cliente, que opera de Lunes a Viernes de 08:00 a 13:00 y de 17:00 a 20:00; Sábados de 08:00 a 12:00.<br>
+            Podrá acceder al Centro de Atención al Cliente llamando al 2634445163. WhatsApp 2634217506.
+        </div>
+    </div>
+
+    <div class="data-row" style="margin-top: 5px;">
+        <span class="label-fixed">Costos de alta de servicios:</span>
+        <span class="value"><span class="price-bold">$ {{.CostoAlta}}</span> (pagaderos en 1 cuotas iguales y consecutivas)</span>
+    </div>
+
+    <div class="data-row">
+        <span class="label-fixed">Plazo de instalación:</span>
+        <div class="value support-text">
+            15 días hábiles a partir del pago de 1º cuota de alta de servicio. Este periodo podrá extenderse, en casos especiales, sin que ello genere derecho a reclamo alguno por parte del Cliente.
+        </div>
+    </div>
+
+    <div class="signature-container">
+        <div class="signature-box">
+             <div class="signature-img-wrapper">
+                 {{if .MostrarFirma}}
+                    <img src="{{.FirmaSrcURL}}" alt="Firma" style="max-width:280px; max-height:70px;"/>
+                 {{end}}
+             </div>
+             <div class="signature-line"></div>
+             <div class="signature-label">Firma del Solicitante</div>
+        </div>
+    </div>
+
+</body>
+</html> 

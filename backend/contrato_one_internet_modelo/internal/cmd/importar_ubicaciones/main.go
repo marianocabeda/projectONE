@@ -15,7 +15,7 @@ func main() {
     // Indicar modo importación
     os.Setenv("APP_ENV", "import")
 
-    // Cargar el archivo .env MANUALMENTE
+    // Cargar el archivo .env manualmente
     // siempre desde la raíz del proyecto
     err := godotenv.Overload("../../../.env")
     if err != nil {
@@ -25,7 +25,7 @@ func main() {
     // Inicializar logger
     logger.Init("desarrollo")
 
-    // Cargar configuración ahora sí usando .env
+    // Cargar configuración usando .env
     appCfg, err := config.LoadConfig()
     if err != nil {
         logger.Error.Fatalf("Error al cargar config: %v", err)

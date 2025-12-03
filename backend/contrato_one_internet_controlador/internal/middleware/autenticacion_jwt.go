@@ -8,7 +8,6 @@ import (
 
 	"contrato_one_internet_controlador/internal/config"
 	"contrato_one_internet_controlador/internal/utilidades"
-	//jwt_util "contrato_one_internet_controlador/internal/utilidades" // Usamos alias
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -35,7 +34,7 @@ func JWTAuthMiddleware(cfg *config.Config) func(http.Handler) http.Handler {
 			}
 			tokenString := headerParts[1]
 
-			// ¡CAMBIO CLAVE! Usamos la nueva struct ClaimsJWT que incluye permisos.
+			// Usamos la nueva struct ClaimsJWT para los claims personalizados
 			claims := &utilidades.ClaimsJWT{}
 			token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -45,7 +44,7 @@ func JWTAuthMiddleware(cfg *config.Config) func(http.Handler) http.Handler {
 			})
 
 			if err != nil {
-				// (Aquí puedes manejar Errores de token expirado, etc.)
+				// (Acá se puede manejar Errores de token expirado, etc.)
 				utilidades.ResponderError(w, http.StatusUnauthorized, "Token expirado o inválido")
 				return
 			}
@@ -55,59 +54,15 @@ func JWTAuthMiddleware(cfg *config.Config) func(http.Handler) http.Handler {
 				return
 			}
 
-			// Adjuntamos los claims (que ahora tienen los permisos) al contexto
+			// Adjuntamos los claims al contexto
 			ctx := context.WithValue(r.Context(), claimsContextKey, claims)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
 }
 
-// GetClaimsFromContext helper para obtener los claims (con permisos) en los handlers
+// GetClaimsFromContext helper para obtener los claims en los handlers
 func GetClaimsFromContext(ctx context.Context) (*utilidades.ClaimsJWT, bool) {
 	claims, ok := ctx.Value(claimsContextKey).(*utilidades.ClaimsJWT)
 	return claims, ok
 }
-
-
-
-
-
-/*
-import (
-	"net/http"
-	"strings"
-	"context"
-
-	"github.com/golang-jwt/jwt/v5"
-	"contrato_one_internet_controlador/internal/config"
-	"contrato_one_internet_controlador/internal/utilidades"
-)
-
-func Autenticacion(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tokenStr := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
-		if tokenStr == "" {
-			utilidades.EnviarRespuestaError(w, http.StatusUnauthorized, "Token requerido", nil)
-			return
-		}
-
-		cfg := config.GetConfig()
-		token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
-			return []byte(cfg.JWTSecret), nil
-		})
-		if err != nil || !token.Valid {
-			utilidades.EnviarRespuestaError(w, http.StatusUnauthorized, "Token inválido", err)
-			return
-		}
-
-		// Agregar claims al context (e.g., userID, roles)
-		claims, ok := token.Claims.(jwt.MapClaims)
-		if !ok {
-			utilidades.EnviarRespuestaError(w, http.StatusUnauthorized, "Claims inválidos", nil)
-			return
-		}
-		ctx := context.WithValue(r.Context(), "userID", claims["user_id"])
-		ctx = context.WithValue(ctx, "roles", claims["roles"])
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
-}*/

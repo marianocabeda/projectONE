@@ -47,7 +47,6 @@ func (h *AuthHandler) setRefreshCookie(w http.ResponseWriter, refreshToken strin
 		HttpOnly: true, 
 		Secure:   true, // Solo viaja por HTTPS (false en desarrollo si no es HTTPS)
 		Path:     "/",
-		// Domain:   "", // Dejar vacío suele ser más seguro y flexible (acepta el host actual)
 		Expires:  expires,
 		SameSite: http.SameSiteNoneMode, // Protección CSRF robusta
 	}

@@ -37,7 +37,6 @@ func (h *UsuarioHandler) VerificarEmailHandler(w http.ResponseWriter, r *http.Re
 
 	err := h.UsuarioService.VerificarTokenEmail(ctx, VerificarEmailRequest.Token)
 	if err != nil {
-		//utilidades.ResponderError(w, http.StatusUnauthorized, err.Error())
 		utilidades.ManejarErrorHTTP(w, err)
 		return
 	}

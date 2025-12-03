@@ -69,13 +69,13 @@ func (s *ServicioCorreo) EnviarCorreoCredenciales(destinatario, enlace, nombreCo
     data := EmailData{
         UserName:         userName,
         VerificationLink: enlace,
-        Password:         password, // <--- Aquí pasamos la contraseña plana
+        Password:         password, // <--- Se pasa la contraseña plana
         ShowToken:        false,
-        ExpirationHours:  24, // O el tiempo que definas
+        ExpirationHours:  24, // O el tiempo que se desee
         Year:             time.Now().Year(),
     }
 
-    // Usamos el nuevo template y un asunto de Bienvenida
+    // Se usa el nuevo template y un asunto de Bienvenida
     return s.enviarEmailHTMLConPlantilla(destinatario, "Bienvenido a ONE Internet - Tus Credenciales", data, s.CredentialsPath)
 }
 

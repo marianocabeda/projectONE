@@ -102,64 +102,6 @@ func (h *PersonasHandler) CrearPersonaConUsuarioHandler(w http.ResponseWriter, r
 	}
 }
 
-/*
-func (h *PersonasHandler) CrearPersonaConUsuarioHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	// Obtener claims del contexto si el JWT existe (puede ser registro público).
-	var idUsuario int64
-	if claims, ok := middleware.GetClaimsFromContext(ctx); ok {
-		fmt.Printf("Claims obtenidos: %+v\n", claims)
-		idUsuario = int64(claims.IDUsuario)
-	} else {
-		fmt.Printf("No se encontraron claims en el contexto.\n")
-	}
-
-	defer r.Body.Close()
-
-	var req modelos.CrearPersonaConUsuarioRequest
-
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		utilidades.ResponderError(w, http.StatusBadRequest, "JSON inválido o mal formado")
-		return
-	}
-
-	if err := validadores.ValidarPersona(req.Persona); err != nil {
-		utilidades.ResponderError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	req.Direccion.Normalizar()
-
-	if err := validadores.ValidarDireccion(req.Direccion); err != nil {
-		utilidades.ResponderError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	if err := validadores.ValidarPassword(req.Password); err != nil {
-		utilidades.ResponderError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	// Llamar al servicio
-	if err := h.service.CrearPersonaConUsuario(ctx, req, idUsuario); err != nil {
-
-		var modeloErr *servicios.ModeloError
-		if errors.As(err, &modeloErr) {
-			utilidades.ResponderError(w, modeloErr.StatusCode, modeloErr.Message)
-			return
-		}
-
-		logger.Error.Printf("Error creando persona con usuario: %v", err)
-		utilidades.ResponderError(w, http.StatusInternalServerError, "error interno del servidor")
-		return
-	}
-
-	utilidades.ResponderJSON(w, http.StatusCreated, map[string]string{
-		"mensaje": "Usuario creado y correo de verificación enviado.",
-	})
-}*/
-
 // ObtenerPerfilPersonaHandler maneja GET /v1/api/perfil/persona
 // Este endpoint utiliza el JWT para identificar al usuario autenticado y
 // solicitar al servicio Modelo los datos completos de la persona.
